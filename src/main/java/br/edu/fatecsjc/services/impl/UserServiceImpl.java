@@ -3,7 +3,7 @@ package br.edu.fatecsjc.services.impl;
 import br.edu.fatecsjc.models.User;
 import br.edu.fatecsjc.repositories.UserRepository;
 import br.edu.fatecsjc.services.UserService;
-import org.hibernate.ObjectNotFoundException;
+import br.edu.fatecsjc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id).orElse(null);
 
         if (user == null)
-            throw new ObjectNotFoundException("User não encontrado. Id: " + id, ", Tipo: " + User.class.getName());
+            throw new ObjectNotFoundException("User não encontrado. Id: " + id + ", Tipo: " + User.class.getName());
 
         return user;
     }

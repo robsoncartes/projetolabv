@@ -1,13 +1,10 @@
 package br.edu.fatecsjc.services.impl;
 
-import br.edu.fatecsjc.models.Account;
 import br.edu.fatecsjc.models.Administrator;
 import br.edu.fatecsjc.models.User;
 import br.edu.fatecsjc.services.DBService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Arrays;
 
 @Service
 public class DBServiceImpl implements DBService {
