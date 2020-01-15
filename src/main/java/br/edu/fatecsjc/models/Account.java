@@ -20,5 +20,4 @@ public abstract class Account {
 
     private String email;
     private String username;
-
 }
