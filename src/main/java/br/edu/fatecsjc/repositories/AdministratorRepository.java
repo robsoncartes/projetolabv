@@ -18,4 +18,7 @@ public interface AdministratorRepository extends CrudRepository<Administrator, L
 
     @Override
     <S extends Administrator> List<S> saveAll(Iterable<S> entities);
+
+    @Override
+    Iterable<Administrator> findAll();
 }

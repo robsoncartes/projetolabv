@@ -24,4 +24,12 @@ public class AdministratorController {
         return ResponseEntity.ok().body(administrator);
 
     }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<Iterable<Administrator>> findAllAdministrators() {
+
+        Iterable<Administrator> administrators = administratorService.findAdministrators();
+
+        return ResponseEntity.ok().body(administrators);
+    }
 }

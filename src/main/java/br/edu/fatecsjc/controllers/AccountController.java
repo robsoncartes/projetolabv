@@ -23,4 +23,12 @@ public class AccountController {
 
         return ResponseEntity.ok().body(account);
     }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<Iterable<Account>> findAllAccounts() {
+
+        Iterable<Account> accounts = accountService.findAccounts();
+
+        return ResponseEntity.ok().body(accounts);
+    }
 }

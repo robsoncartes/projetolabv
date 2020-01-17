@@ -23,4 +23,12 @@ public class UserController {
 
         return ResponseEntity.ok().body(user);
     }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<Iterable<User>> findAllUsers() {
+
+        Iterable<User> users = userService.findUsers();
+
+        return ResponseEntity.ok().body(users);
+    }
 }

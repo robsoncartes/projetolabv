@@ -11,4 +11,6 @@ public interface AccountService {
     void saveAccount(Account account);
 
     void saveAccounts(List<Account> accounts);
+
+    Iterable<Account> findAccounts();
 }

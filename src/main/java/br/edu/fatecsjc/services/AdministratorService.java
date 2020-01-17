@@ -11,4 +11,6 @@ public interface AdministratorService {
     void saveAdministrator(Administrator administrator);
 
     void saveAdministrators(List<Administrator> administrators);
+
+    Iterable<Administrator> findAdministrators();
 }

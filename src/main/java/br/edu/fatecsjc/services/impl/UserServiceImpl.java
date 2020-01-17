@@ -35,4 +35,10 @@ public class UserServiceImpl implements UserService {
     public void saveUsers(List<User> users) {
         userRepository.saveAll(users);
     }
+
+    @Override
+    public Iterable<User> findUsers() {
+
+        return userRepository.findAll();
+    }
 }

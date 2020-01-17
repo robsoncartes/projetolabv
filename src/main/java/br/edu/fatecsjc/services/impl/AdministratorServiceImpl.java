@@ -35,4 +35,10 @@ public class AdministratorServiceImpl implements AdministratorService {
     public void saveAdministrators(List<Administrator> administrators) {
         administratorRepository.saveAll(administrators);
     }
+
+    @Override
+    public Iterable<Administrator> findAdministrators() {
+
+        return administratorRepository.findAll();
+    }
 }

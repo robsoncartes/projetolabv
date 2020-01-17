@@ -11,4 +11,6 @@ public interface UserService {
     void saveUser(User user);
 
     void saveUsers(List<User> users);
+
+    Iterable<User> findUsers();
 }

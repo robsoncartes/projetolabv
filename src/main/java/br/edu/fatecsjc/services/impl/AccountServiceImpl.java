@@ -35,4 +35,10 @@ public class AccountServiceImpl implements AccountService {
     public void saveAccounts(List<Account> accounts) {
         accountRepository.saveAll(accounts);
     }
+
+    @Override
+    public Iterable<Account> findAccounts() {
+
+        return accountRepository.findAll();
+    }
 }

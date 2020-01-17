@@ -17,4 +17,7 @@ public interface AccountRepository extends CrudRepository<Account, Long> {
 
     @Override
     <S extends Account> List<S> saveAll(Iterable<S> entities);
+
+    @Override
+    Iterable<Account> findAll();
 }
