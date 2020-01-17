@@ -24,7 +24,8 @@ public class Answer {
     @JoinColumn(name = "question_id")
     private Question question;
 
-    public boolean isValid(Answer answer) {
+    public boolean isValid(Answer answer){
         return this.getAnswer().equals(answer.getAnswer());
     }
+
 }

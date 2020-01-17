@@ -1,7 +1,6 @@
 package br.edu.fatecsjc.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,18 +33,36 @@ public class Question {
     @Setter
     private List<Answer> answers = new LinkedList<>();
 
-    public Question(Integer id, String question, String assertion) {
+    @ManyToOne
+    @JoinColumn(name = "exam_id")
+    @Getter
+    @Setter
+    private Exam exam;
+
+    public Question(Integer id, String question, Exam exam) {
         this.id = id;
         this.question = question;
-        this.assertion = assertion;
+        this.exam = exam;
     }
 
-    public void setAssertion(String assertion){
+    public void setAssertion(String assertion) {
 
-        for (Answer answer : getAnswers())
+        for (Answer answer : getAnswers()) {
             if (answer.getAnswer().equals(assertion)) {
                 this.assertion = assertion;
-                break;
             }
+        }
+    }
+
+    public void addAnswer(Answer answer) {
+        this.getAnswers().add(answer);
+    }
+
+    public void addAnswers(List<Answer> answers) {
+        this.getAnswers().addAll(answers);
+    }
+
+    public boolean isValid(String questionTitle) {
+        return this.getQuestion().equals(questionTitle);
     }
 }
