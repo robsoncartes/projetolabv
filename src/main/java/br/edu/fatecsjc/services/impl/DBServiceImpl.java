@@ -22,6 +22,12 @@ public class DBServiceImpl implements DBService {
     @Autowired
     private ExamServiceImpl examService;
 
+    @Autowired
+    private ActivityServiceImpl activityService;
+
+    @Autowired
+    private ChoiceServiceImpl choiceService;
+
     @Override
     public void instantiateTestDatabase() throws Exception {
 
@@ -34,6 +40,7 @@ public class DBServiceImpl implements DBService {
         accountService.saveAccount(account4);
 
         Exam exam1 = new Exam(null, "Exam 1", "Type 1", "Description 1", account1.getUsername());
+        Activity activity1 = new Activity(null, account1.getUsername(), exam1.getTitle());
 
         Question q1 = new Question(null, "Question 1", exam1);
         q1.setAssertion("QA11");
@@ -72,6 +79,14 @@ public class DBServiceImpl implements DBService {
         Answer a43 = new Answer(null, "QA43", false, q4);
         Answer a44 = new Answer(null, "QA44", true, q4);
 
+        Choice choice1 = new Choice(null, "Question 1", "QA11", true, activity1);
+        Choice choice2 = new Choice(null, "Question 2", "QA22", true, activity1);
+        Choice choice3 = new Choice(null, "Question 3", "QA33", true, activity1);
+        Choice choice4 = new Choice(null, "Question 4", "QA44", true, activity1);
+        activity1.addChoice(choice1);
+
+        activityService.saveActivity(activity1);
+        choiceService.saveChoices(Arrays.asList(choice1, choice2, choice3, choice4));
 
         exam1.addQuestions(Arrays.asList(q1, q2));
         exam2.addQuestions(Arrays.asList(q3, q4));

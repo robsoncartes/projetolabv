@@ -21,6 +21,10 @@ public class Exam {
     @OneToMany(mappedBy = "exam")
     private List<Question> questions = new LinkedList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "activity_id")
+    private Activity activity;
+
     public Exam() {
     }
 
