@@ -4,7 +4,7 @@ import br.edu.fatecsjc.models.Choice;
 
 public interface ChoiceService {
 
-    Choice findChoiceById(Integer id);
+    Choice findById(Integer id);
 
     void saveChoice(Choice choice);
 

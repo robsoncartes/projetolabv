@@ -21,7 +21,7 @@ public class AccountServiceImpl implements AccountService {
         Account account = accountRepository.findById(id).orElse(null);
 
         if (account == null)
-            throw new ObjectNotFoundException("Conta não encontrada. Id: " + id + ", Tipo: " + Account.class.getName());
+            throw new ObjectNotFoundException("Accouunt not found. Id: " + id + ", Type: " + Account.class.getName());
 
         return account;
     }

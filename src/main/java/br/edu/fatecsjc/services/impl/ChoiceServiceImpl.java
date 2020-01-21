@@ -14,7 +14,7 @@ public class ChoiceServiceImpl implements ChoiceService {
     private ChoiceRepository choiceRepository;
 
     @Override
-    public Choice findChoiceById(Integer id) {
+    public Choice findById(Integer id) {
 
         Choice choice = choiceRepository.findById(id).orElse(null);
 

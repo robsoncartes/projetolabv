@@ -4,7 +4,7 @@ import br.edu.fatecsjc.models.Activity;
 
 public interface ActivityService {
 
-    Activity findActivityById(Integer id);
+    Activity findById(Integer id);
 
     void saveActivity(Activity activity);
 

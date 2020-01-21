@@ -14,7 +14,7 @@ public class ActivityServiceImpl implements ActivityService {
     private ActivityRepository activityRepository;
 
     @Override
-    public Activity findActivityById(Integer id) {
+    public Activity findById(Integer id) {
 
         Activity activity = activityRepository.findById(id).orElse(null);
 

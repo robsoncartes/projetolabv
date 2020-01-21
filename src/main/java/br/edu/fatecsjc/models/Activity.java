@@ -1,5 +1,6 @@
 package br.edu.fatecsjc.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ public class Activity {
     private String username;
     private String examTitle;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "activity")
     private List<Choice> choices = new LinkedList<>();
 
