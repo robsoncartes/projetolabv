@@ -18,4 +18,7 @@ public interface ExamRepository extends CrudRepository<Exam, Integer> {
 
     @Override
     <S extends Exam> List<S> saveAll(Iterable<S> entities);
+
+    @Override
+    Iterable<Exam> findAll();
 }

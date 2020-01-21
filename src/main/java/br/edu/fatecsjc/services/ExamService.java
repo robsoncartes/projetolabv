@@ -6,9 +6,11 @@ import java.util.List;
 
 public interface ExamService {
 
-    Exam findExamById(Integer id);
+    Exam findById(Integer id);
 
     void saveExam(Exam exam);
 
     void saveExams(List<Exam> exams);
+
+    Iterable<Exam> findExams();
 }

@@ -16,7 +16,7 @@ public class ExamServiceImpl implements ExamService {
     private ExamRepository examRepository;
 
     @Override
-    public Exam findExamById(Integer id) {
+    public Exam findById(Integer id) {
 
         Exam exam = examRepository.findById(id).orElse(null);
 
@@ -34,5 +34,11 @@ public class ExamServiceImpl implements ExamService {
     @Override
     public void saveExams(List<Exam> exams) {
         examRepository.saveAll(exams);
+    }
+
+    @Override
+    public Iterable<Exam> findExams() {
+
+        return examRepository.findAll();
     }
 }
