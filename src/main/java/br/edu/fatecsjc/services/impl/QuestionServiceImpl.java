@@ -16,7 +16,7 @@ public class QuestionServiceImpl implements QuestionService {
     private QuestionRepository questionRepository;
 
     @Override
-    public Question findQuestionById(Integer id) {
+    public Question findById(Integer id) {
 
         Question question = questionRepository.findById(id).orElse(null);
 
@@ -34,5 +34,11 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public void saveQuestions(List<Question> questions) {
         questionRepository.saveAll(questions);
+    }
+
+    @Override
+    public Iterable<Question> findQuestions() {
+
+        return questionRepository.findAll();
     }
 }

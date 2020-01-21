@@ -18,4 +18,7 @@ public interface QuestionRepository extends CrudRepository<Question, Integer> {
 
     @Override
     <S extends Question> List<S> saveAll(Iterable<S> entities);
+
+    @Override
+    Iterable<Question> findAll();
 }
