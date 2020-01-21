@@ -23,4 +23,12 @@ public class ChoiceController {
 
         return ResponseEntity.ok().body(choice);
     }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<Iterable<Choice>> findAllChoices() {
+
+        Iterable<Choice> choices = choiceService.findChoices();
+
+        return ResponseEntity.ok().body(choices);
+    }
 }

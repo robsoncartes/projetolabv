@@ -23,4 +23,12 @@ public class ActivityController {
 
         return ResponseEntity.ok().body(activity);
     }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<Iterable<Activity>> findAllActivities() {
+
+        Iterable<Activity> activities = activityService.findActivities();
+
+        return ResponseEntity.ok().body(activities);
+    }
 }

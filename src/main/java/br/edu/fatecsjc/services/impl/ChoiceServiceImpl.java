@@ -33,4 +33,10 @@ public class ChoiceServiceImpl implements ChoiceService {
     public void saveChoices(Iterable<Choice> choices) {
         choiceRepository.saveAll(choices);
     }
+
+    @Override
+    public Iterable<Choice> findChoices() {
+
+        return choiceRepository.findAll();
+    }
 }

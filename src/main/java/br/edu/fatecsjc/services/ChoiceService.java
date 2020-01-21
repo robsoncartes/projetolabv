@@ -9,4 +9,6 @@ public interface ChoiceService {
     void saveChoice(Choice choice);
 
     void saveChoices(Iterable<Choice> choices);
+
+    Iterable<Choice> findChoices();
 }
