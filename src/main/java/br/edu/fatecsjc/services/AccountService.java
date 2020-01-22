@@ -8,7 +8,7 @@ public interface AccountService {
 
     Account findById(Long id);
 
-    void saveAccount(Account account);
+    Account saveAccount(Account account);
 
     void saveAccounts(List<Account> accounts);
 

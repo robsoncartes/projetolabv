@@ -4,10 +4,11 @@ import br.edu.fatecsjc.models.Account;
 import br.edu.fatecsjc.services.impl.AccountServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import javax.validation.Valid;
+import java.net.URI;
 
 @RestController("AccountController")
 @RequestMapping(value = "/accounts")
@@ -30,5 +31,15 @@ public class AccountController {
         Iterable<Account> accounts = accountService.findAccounts();
 
         return ResponseEntity.ok().body(accounts);
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Void> insertAccount(@Valid @RequestBody Account account) {
+
+        Account obj = accountService.saveAccount(account);
+
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+
+        return ResponseEntity.created(uri).build();
     }
 }

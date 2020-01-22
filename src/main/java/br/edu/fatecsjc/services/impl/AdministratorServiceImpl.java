@@ -27,8 +27,9 @@ public class AdministratorServiceImpl implements AdministratorService {
     }
 
     @Override
-    public void saveAdministrator(Administrator administrator) {
-        administratorRepository.save(administrator);
+    public Administrator saveAdministrator(Administrator administrator) {
+        administrator.setId(null);
+        return administratorRepository.save(administrator);
     }
 
     @Override

@@ -8,7 +8,7 @@ public interface AdministratorService {
 
     Administrator findById(Long id);
 
-    void saveAdministrator(Administrator administrator);
+    Administrator saveAdministrator(Administrator administrator);
 
     void saveAdministrators(List<Administrator> administrators);
 
