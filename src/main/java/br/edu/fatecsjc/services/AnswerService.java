@@ -6,9 +6,11 @@ import java.util.List;
 
 public interface AnswerService {
 
-    Answer findAnswerById(Integer id);
+    Answer findById(Integer id);
 
     void saveAnswer(Answer answer);
 
     void saveAnswers(List<Answer> answers);
+
+    Iterable<Answer> findAnswers();
 }

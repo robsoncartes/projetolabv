@@ -16,7 +16,7 @@ public class AnswerServiceImpl implements AnswerService {
     private AnswerRepository answerRepository;
 
     @Override
-    public Answer findAnswerById(Integer id) {
+    public Answer findById(Integer id) {
 
         Answer answer = answerRepository.findById(id).orElse(null);
 
@@ -34,5 +34,11 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public void saveAnswers(List<Answer> answers) {
         answerRepository.saveAll(answers);
+    }
+
+    @Override
+    public Iterable<Answer> findAnswers() {
+
+        return answerRepository.findAll();
     }
 }
