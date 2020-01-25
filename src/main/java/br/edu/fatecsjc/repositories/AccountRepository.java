@@ -12,6 +12,8 @@ public interface AccountRepository extends CrudRepository<Account, Long> {
 
     Optional<Account> findById(Long id);
 
+    Account findByEmail(String email);
+
     @Override
     <S extends Account> S save(S entity);
 

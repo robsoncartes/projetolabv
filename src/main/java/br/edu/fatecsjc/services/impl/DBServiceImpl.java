@@ -3,6 +3,7 @@ package br.edu.fatecsjc.services.impl;
 import br.edu.fatecsjc.models.*;
 import br.edu.fatecsjc.services.DBService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -28,13 +29,16 @@ public class DBServiceImpl implements DBService {
     @Autowired
     private ChoiceServiceImpl choiceService;
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
     @Override
     public void instantiateTestDatabase() throws Exception {
 
-        Administrator account1 = new Administrator(null, "admin1", "admin1");
-        User account2 = new User(null, "user1", "user1");
-        Administrator account3 = new Administrator(null, "admin2", "admin2");
-        User account4 = new User(null, "user2", "user2");
+        Administrator account1 = new Administrator(null, "email1", "user1", passwordEncoder.encode("pass"));
+        User account2 = new User(null, "email2", "user2", passwordEncoder.encode("pass"));
+        Administrator account3 = new Administrator(null, "email3", "user3", passwordEncoder.encode("pass"));
+        User account4 = new User(null, "email4", "user4", passwordEncoder.encode("pass"));
 
         accountService.saveAccounts(Arrays.asList(account1, account2, account3));
         accountService.saveAccount(account4);

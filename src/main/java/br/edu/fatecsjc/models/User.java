@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(name = "account_id")
 public class User extends Account {
 
-    public User(Long id, String email, String username) {
-        super(id, email, username);
+    public User(Long id, String email, String username, String password) {
+        super(id, email, username, password);
     }
 }
