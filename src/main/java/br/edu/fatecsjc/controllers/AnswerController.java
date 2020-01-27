@@ -1,7 +1,9 @@
 package br.edu.fatecsjc.controllers;
 
 import br.edu.fatecsjc.models.Answer;
+import br.edu.fatecsjc.models.views.AnswerView;
 import br.edu.fatecsjc.services.impl.AnswerServiceImpl;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +19,7 @@ public class AnswerController {
     private AnswerServiceImpl answerService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @JsonView(AnswerView.AnswerSimple.class)
     public ResponseEntity<Answer> findAnswerById(@PathVariable Integer id) {
 
         Answer answer = answerService.findById(id);
@@ -25,6 +28,7 @@ public class AnswerController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
+    @JsonView(AnswerView.AnswerComplete.class)
     public ResponseEntity<Iterable<Answer>> findAllAnswers() {
 
         Iterable<Answer> answers = answerService.findAnswers();

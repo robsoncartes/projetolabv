@@ -1,7 +1,9 @@
 package br.edu.fatecsjc.controllers;
 
 import br.edu.fatecsjc.models.Activity;
+import br.edu.fatecsjc.models.views.ActivityView;
 import br.edu.fatecsjc.services.impl.ActivityServiceImpl;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +19,7 @@ public class ActivityController {
     private ActivityServiceImpl activityService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @JsonView(ActivityView.ActivitySimple.class)
     public ResponseEntity<Activity> findActivityById(@PathVariable Integer id) {
 
         Activity activity = activityService.findById(id);
@@ -25,6 +28,7 @@ public class ActivityController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
+    @JsonView(ActivityView.ActivityComplete.class)
     public ResponseEntity<Iterable<Activity>> findAllActivities() {
 
         Iterable<Activity> activities = activityService.findActivities();

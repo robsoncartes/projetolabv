@@ -1,7 +1,9 @@
 package br.edu.fatecsjc.controllers;
 
 import br.edu.fatecsjc.models.Question;
+import br.edu.fatecsjc.models.views.QuestionView;
 import br.edu.fatecsjc.services.impl.QuestionServiceImpl;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +19,7 @@ public class QuestionController {
     private QuestionServiceImpl questionService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @JsonView(QuestionView.QuestionSimple.class)
     public ResponseEntity<Question> findQuestionById(@PathVariable Integer id) {
 
         Question question = questionService.findById(id);
@@ -25,6 +28,7 @@ public class QuestionController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
+    @JsonView(QuestionView.QuestionComplete.class)
     public ResponseEntity<Iterable<Question>> findQuestions() {
 
         Iterable<Question> questions = questionService.findQuestions();

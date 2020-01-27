@@ -1,13 +1,14 @@
 package br.edu.fatecsjc.config;
 
 import br.edu.fatecsjc.security.JWTAuthenticationFilter;
+import br.edu.fatecsjc.security.JWTAuthorizationFilter;
 import br.edu.fatecsjc.security.JWTUtil;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,8 +26,11 @@ import java.util.Arrays;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@AllArgsConstructor
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    /**
+     * Creates an instance with the default configuration enabled.
+     */
 
     @Autowired
     private Environment environment;
@@ -40,10 +44,34 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] PUBLIC_MATCHERS = {
             "/h2-console/**",
-            "/accounts/**",
-            "/exams/**",
-            "/login/**"
     };
+
+    public static final String[] PUBLIC_MATCHERS_GET = {
+            "/activities/**",
+            "/exams/**",
+            "/questions/**",
+            "/choices/**",
+            "/answers/**"
+    };
+
+    public SpringSecurityConfig(Environment environment, @Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService, JWTUtil jwtUtil) {
+        this.environment = environment;
+        this.userDetailsService = userDetailsService;
+        this.jwtUtil = jwtUtil;
+    }
+
+    /**
+     * Override this method to configure the {@link HttpSecurity}. Typically subclasses
+     * should not invoke this method by calling super as it may override their
+     * configuration. The default configuration is:
+     *
+     * <pre>
+     * http.authorizeRequests().anyRequest().authenticated().and().formLogin().and().httpBasic();
+     * </pre>
+     *
+     * @param http the {@link HttpSecurity} to modify
+     * @throws Exception if an error occurs
+     */
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -55,9 +83,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
+                .antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll()
                 .anyRequest().authenticated();
 
         http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
+        http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 

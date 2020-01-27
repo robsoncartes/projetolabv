@@ -1,6 +1,5 @@
 package br.edu.fatecsjc.controllers;
 
-import br.edu.fatecsjc.models.Account;
 import br.edu.fatecsjc.models.Administrator;
 import br.edu.fatecsjc.services.impl.AdministratorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

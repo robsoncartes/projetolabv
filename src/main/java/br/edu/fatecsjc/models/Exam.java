@@ -1,6 +1,8 @@
 package br.edu.fatecsjc.models;
 
+import br.edu.fatecsjc.models.views.ExamView;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -13,18 +15,29 @@ public class Exam {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView(ExamView.ExamSimple.class)
     private Integer id;
+
+    @JsonView(ExamView.ExamSimple.class)
     private String title;
+
+    @JsonView(ExamView.ExamComplete.class)
     private String type;
+
+    @JsonView(ExamView.ExamComplete.class)
     private String description;
+
+    @JsonView(ExamView.ExamComplete.class)
     private String author;
 
-    @JsonIgnore
+    // @JsonIgnore
     @OneToMany(mappedBy = "exam")
+    @JsonView(ExamView.ExamComplete.class)
     private List<Question> questions = new LinkedList<>();
 
     @ManyToOne
     @JoinColumn(name = "activity_id")
+    @JsonView(ExamView.ExamComplete.class)
     private Activity activity;
 
     public Exam() {

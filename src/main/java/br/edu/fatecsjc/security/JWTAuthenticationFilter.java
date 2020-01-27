@@ -74,8 +74,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
             return "{\"timestamp\": " + date + ", "
                     + "\"status\": 401, "
-                    + "\"error\": \"Não autorizado.\", "
-                    + "\"message\": \"Falha na autenticação: Email ou senha inválidos.\", "
+                    + "\"error\": \"Not authorized.\", "
+                    + "\"message\": \"Authentication failed: Invalid email or password.\", "
                     + "\"path\": \"/login\"}";
         }
     }

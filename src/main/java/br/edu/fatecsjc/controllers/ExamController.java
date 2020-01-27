@@ -1,7 +1,10 @@
 package br.edu.fatecsjc.controllers;
 
 import br.edu.fatecsjc.models.Exam;
+import br.edu.fatecsjc.models.views.AccountView;
+import br.edu.fatecsjc.models.views.ExamView;
 import br.edu.fatecsjc.services.impl.ExamServiceImpl;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +20,7 @@ public class ExamController {
     private ExamServiceImpl examService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @JsonView(ExamView.ExamSimple.class)
     public ResponseEntity<Exam> findExamById(@PathVariable Integer id) {
 
         Exam exam = examService.findById(id);
@@ -25,6 +29,7 @@ public class ExamController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
+    @JsonView(ExamView.ExamComplete.class)
     public ResponseEntity<Iterable<Exam>> findAllExams() {
 
         Iterable<Exam> exams = examService.findExams();

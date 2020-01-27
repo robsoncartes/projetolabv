@@ -1,7 +1,9 @@
 package br.edu.fatecsjc.controllers;
 
 import br.edu.fatecsjc.models.Account;
+import br.edu.fatecsjc.models.views.AccountView;
 import br.edu.fatecsjc.services.impl.AccountServiceImpl;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,7 @@ public class AccountController {
     private AccountServiceImpl accountService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @JsonView(AccountView.AccountLogin.class)
     public ResponseEntity<Account> findAccountById(@PathVariable Long id) {
 
         Account account = accountService.findById(id);
@@ -26,6 +29,7 @@ public class AccountController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
+    @JsonView(AccountView.AccountComplete.class)
     public ResponseEntity<Iterable<Account>> findAllAccounts() {
 
         Iterable<Account> accounts = accountService.findAccounts();
