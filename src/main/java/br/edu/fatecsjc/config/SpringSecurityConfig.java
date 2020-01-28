@@ -54,6 +54,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
             "/answers/**"
     };
 
+    public static final String[] PUBLIC_MATCHERS_POST = {
+            "/accounts/**",
+            "/login/**"
+    };
+
     public SpringSecurityConfig(Environment environment, @Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService, JWTUtil jwtUtil) {
         this.environment = environment;
         this.userDetailsService = userDetailsService;
@@ -84,6 +89,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
                 .antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll()
+                .antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
                 .anyRequest().authenticated();
 
         http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));

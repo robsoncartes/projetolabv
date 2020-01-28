@@ -28,12 +28,12 @@ public class AccountServiceImpl implements AccountService {
         JWTAccount jwtAccount = jwtAccountService.getAccountAuthenticated();
 
         if (jwtAccount == null || !jwtAccount.hasHole(AuthorityName.ADMINISTRATOR) && !id.equals(jwtAccount.getId()))
-            throw new AuthorizationException("Acesso negado.");
+            throw new AuthorizationException("Access denied.");
 
         Account account = accountRepository.findById(id).orElse(null);
 
         if (account == null)
-            throw new ObjectNotFoundException("Accouunt not found. Id: " + id + ", Type: " + Account.class.getName());
+            throw new ObjectNotFoundException("Account not found. Id: " + id + ", Type: " + Account.class.getName());
 
         return account;
     }
@@ -44,7 +44,7 @@ public class AccountServiceImpl implements AccountService {
         JWTAccount jwtAccount = jwtAccountService.getAccountAuthenticated();
 
         if (jwtAccount == null || !jwtAccount.hasHole(AuthorityName.ADMINISTRATOR) && !email.equals(jwtAccount.getUsername()))
-            throw new AuthorizationException("Acesso negado.");
+            throw new AuthorizationException("Access denied.");
 
         Account account = accountRepository.findByEmail(email);
 
@@ -56,6 +56,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account saveAccount(Account account) {
+
         account.setId(null);
         return accountRepository.save(account);
     }

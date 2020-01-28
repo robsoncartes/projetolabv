@@ -1,6 +1,7 @@
 package br.edu.fatecsjc.services.impl;
 
 import br.edu.fatecsjc.models.*;
+import br.edu.fatecsjc.models.enums.AuthorityName;
 import br.edu.fatecsjc.services.DBService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -39,6 +40,9 @@ public class DBServiceImpl implements DBService {
         User account2 = new User(null, "email2", "user2", passwordEncoder.encode("pass"));
         Administrator account3 = new Administrator(null, "email3", "user3", passwordEncoder.encode("pass"));
         User account4 = new User(null, "email4", "user4", passwordEncoder.encode("pass"));
+
+        account1.addAuthorityName(AuthorityName.ADMINISTRATOR);
+        account3.addAuthorityName(AuthorityName.ADMINISTRATOR);
 
         accountService.saveAccounts(Arrays.asList(account1, account2, account3));
         accountService.saveAccount(account4);

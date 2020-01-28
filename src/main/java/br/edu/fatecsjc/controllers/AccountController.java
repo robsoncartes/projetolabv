@@ -28,6 +28,14 @@ public class AccountController {
         return ResponseEntity.ok().body(account);
     }
 
+    @RequestMapping(value = "/email", method = RequestMethod.GET)
+    public ResponseEntity<Account> findAccountByEmail(@RequestParam(value = "value") String email) {
+
+        Account account = accountService.findByEmail(email);
+
+        return ResponseEntity.ok().body(account);
+    }
+
     @RequestMapping(method = RequestMethod.GET)
     @JsonView(AccountView.AccountComplete.class)
     public ResponseEntity<Iterable<Account>> findAllAccounts() {
