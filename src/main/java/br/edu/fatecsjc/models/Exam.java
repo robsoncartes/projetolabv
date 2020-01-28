@@ -1,7 +1,6 @@
 package br.edu.fatecsjc.models;
 
 import br.edu.fatecsjc.models.views.ExamView;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 
@@ -11,6 +10,7 @@ import java.util.List;
 
 @Entity
 @Data
+@Table(name = "exams")
 public class Exam {
 
     @Id
