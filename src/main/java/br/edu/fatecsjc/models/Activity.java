@@ -2,7 +2,6 @@ package br.edu.fatecsjc.models;
 
 import br.edu.fatecsjc.models.views.ActivityView;
 import br.edu.fatecsjc.models.views.ExamView;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 
@@ -49,5 +48,16 @@ public class Activity {
         if (this.getChoices() == null)
             this.setChoices(new LinkedList<>());
         this.getChoices().add(choice);
+    }
+
+    public boolean contains(String questionTitle) {
+
+        if (!(getChoices() == null)) {
+            for (Choice choice : getChoices())
+                if (choice.getQuestionTitle().equals(questionTitle))
+                    return true;
+        }
+
+        return false;
     }
 }

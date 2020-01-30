@@ -59,6 +59,7 @@ public class Question {
         for (Answer answer : getAnswers()) {
             if (answer.getAnswer().equals(assertion)) {
                 this.assertion = assertion;
+                break;
             }
         }
     }
@@ -74,4 +75,6 @@ public class Question {
     public boolean isValid(String questionTitle) {
         return this.getQuestion().equals(questionTitle);
     }
+
+
 }

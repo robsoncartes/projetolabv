@@ -24,9 +24,21 @@ public class ActivityServiceImpl implements ActivityService {
         return activity;
     }
 
+    public boolean isActivityAvailable(String username, String examTitle) {
+
+        for (Activity activity : findActivities()) {
+            if ((activity.getUsername().equals(username)) && (activity.getExamTitle().equals(examTitle)))
+                return false;
+        }
+
+        return true;
+    }
+
     @Override
     public void saveActivity(Activity activity) {
-        activityRepository.save(activity);
+
+        if (isActivityAvailable(activity.getUsername(), activity.getExamTitle()))
+            activityRepository.save(activity);
     }
 
     @Override
@@ -39,4 +51,6 @@ public class ActivityServiceImpl implements ActivityService {
 
         return activityRepository.findAll();
     }
+
+
 }

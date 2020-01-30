@@ -26,9 +26,21 @@ public class ExamServiceImpl implements ExamService {
         return exam;
     }
 
+    public boolean isExamAvailable(String examTitle) {
+
+        for (Exam exam : findExams()) {
+            if (exam.getTitle().equals(examTitle))
+                return false;
+        }
+
+        return true;
+    }
+
     @Override
     public void saveExam(Exam exam) {
-        examRepository.save(exam);
+
+        if (isExamAvailable(exam.getTitle()))
+            examRepository.save(exam);
     }
 
     @Override
