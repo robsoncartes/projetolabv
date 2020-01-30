@@ -1,16 +1,33 @@
 package br.edu.fatecsjc.services;
 
 import br.edu.fatecsjc.models.Answer;
+import br.edu.fatecsjc.repositories.AnswerRepository;
+import br.edu.fatecsjc.services.exceptions.ObjectNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
+@Service
+public class AnswerService {
 
-public interface AnswerService {
+    @Autowired
+    private AnswerRepository answerRepository;
 
-    Answer findById(Integer id);
+    public Answer findById(Integer id) {
 
-    void saveAnswer(Answer answer);
+        Answer answer = answerRepository.findById(id).orElse(null);
 
-    void saveAnswers(List<Answer> answers);
+        if (answer == null)
+            throw new ObjectNotFoundException("Answer not found. Id: " + id + ", Type: " + Answer.class.getName());
 
-    Iterable<Answer> findAnswers();
+        return answer;
+    }
+
+    public void saveAnswer(Answer answer) {
+        answerRepository.save(answer);
+    }
+
+    public Iterable<Answer> findAnswers() {
+
+        return answerRepository.findAll();
+    }
 }

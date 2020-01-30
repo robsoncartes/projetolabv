@@ -1,4 +1,4 @@
-package br.edu.fatecsjc.services.impl;
+package br.edu.fatecsjc.services.exceptions;
 
 import br.edu.fatecsjc.models.Account;
 import br.edu.fatecsjc.repositories.AccountRepository;
@@ -10,18 +10,19 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class JWTAccountDetailsService implements UserDetailsService {
+
 
     @Autowired
     private AccountRepository accountRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Account account = accountRepository.findByEmail(email);
+        Account account = accountRepository.findByEmail(username);
 
         if (account == null)
-            throw new UsernameNotFoundException(email);
+            throw new UsernameNotFoundException(username);
 
         return new JWTAccount(account.getId(), account.getEmail(), account.getPassword(), account.getAuthorityNames());
     }

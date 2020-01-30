@@ -1,18 +1,61 @@
 package br.edu.fatecsjc.services;
 
 import br.edu.fatecsjc.models.Account;
+import br.edu.fatecsjc.models.enums.AuthorityName;
+import br.edu.fatecsjc.repositories.AccountRepository;
+import br.edu.fatecsjc.security.JWTAccount;
+import br.edu.fatecsjc.services.exceptions.AuthorizationException;
+import br.edu.fatecsjc.services.exceptions.ObjectNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
+@Service
+public class AccountService {
 
-public interface AccountService {
+    @Autowired
+    private AccountRepository accountRepository;
 
-    Account findById(Long id);
+    @Autowired
+    private JWTAccountService jwtAccountService;
 
-    Account findByEmail(String email);
+    public Account findById(Long id) {
 
-    Account saveAccount(Account account);
+        JWTAccount jwtAccount = jwtAccountService.getAccountAuthenticated();
 
-    void saveAccounts(List<Account> accounts);
+        if (jwtAccount == null || !jwtAccount.hasHole(AuthorityName.ADMINISTRATOR) && !id.equals(jwtAccount.getId()))
+            throw new AuthorizationException("Access denied.");
 
-    Iterable<Account> findAccounts();
+        Account account = accountRepository.findById(id).orElse(null);
+
+        if (account == null)
+            throw new ObjectNotFoundException("Account not found. Id: " + id + ", Type: " + Account.class.getName());
+
+        return account;
+    }
+
+    public Account findByEmail(String email) {
+
+        JWTAccount jwtAccount = jwtAccountService.getAccountAuthenticated();
+
+        if (jwtAccount == null || !jwtAccount.hasHole(AuthorityName.ADMINISTRATOR) && !email.equals(jwtAccount.getUsername()))
+            throw new AuthorizationException("Access denied.");
+
+        Account account = accountRepository.findByEmail(email);
+
+        if (account == null)
+            throw new ObjectNotFoundException("Account not found. Email: " + email + ", Type: " + Account.class.getName());
+
+        return account;
+    }
+
+    public Account saveAccount(Account account) {
+
+        account.setId(null);
+        return accountRepository.save(account);
+    }
+
+    public Iterable<Account> findAccounts() {
+
+        return accountRepository.findAll();
+    }
 }

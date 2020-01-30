@@ -1,7 +1,7 @@
 package br.edu.fatecsjc.controllers;
 
 import br.edu.fatecsjc.models.Administrator;
-import br.edu.fatecsjc.services.impl.AdministratorServiceImpl;
+import br.edu.fatecsjc.services.AdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ import java.net.URI;
 public class AdministratorController {
 
     @Autowired
-    private AdministratorServiceImpl administratorService;
+    private AdministratorService administratorService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Administrator> findAdministratorById(@PathVariable Long id) {

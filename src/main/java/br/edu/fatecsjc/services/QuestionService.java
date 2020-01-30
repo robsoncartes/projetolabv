@@ -1,16 +1,33 @@
 package br.edu.fatecsjc.services;
 
 import br.edu.fatecsjc.models.Question;
+import br.edu.fatecsjc.repositories.QuestionRepository;
+import br.edu.fatecsjc.services.exceptions.ObjectNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
+@Service
+public class QuestionService {
 
-public interface QuestionService {
+    @Autowired
+    private QuestionRepository questionRepository;
 
-    Question findById(Integer id);
+    public Question findById(Integer id) {
 
-    void saveQuestion(Question question);
+        Question question = questionRepository.findById(id).orElse(null);
 
-    void saveQuestions(List<Question> questions);
+        if (question == null)
+            throw new ObjectNotFoundException("Question not found. Id: " + id + ", Type: " + Question.class.getName());
 
-    Iterable<Question> findQuestions();
+        return question;
+    }
+
+    public void saveQuestion(Question question) {
+        questionRepository.save(question);
+    }
+
+    public Iterable<Question> findQuestions() {
+
+        return questionRepository.findAll();
+    }
 }

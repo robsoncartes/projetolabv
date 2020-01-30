@@ -2,7 +2,7 @@ package br.edu.fatecsjc.controllers;
 
 import br.edu.fatecsjc.models.Question;
 import br.edu.fatecsjc.models.views.QuestionView;
-import br.edu.fatecsjc.services.impl.QuestionServiceImpl;
+import br.edu.fatecsjc.services.QuestionService;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class QuestionController {
 
     @Autowired
-    private QuestionServiceImpl questionService;
+    private QuestionService questionService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @JsonView(QuestionView.QuestionSimple.class)

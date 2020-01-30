@@ -1,7 +1,7 @@
 package br.edu.fatecsjc.controllers;
 
 import br.edu.fatecsjc.models.User;
-import br.edu.fatecsjc.services.impl.UserServiceImpl;
+import br.edu.fatecsjc.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ import java.net.URI;
 public class UserController {
 
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<User> findUserById(@PathVariable Long id) {

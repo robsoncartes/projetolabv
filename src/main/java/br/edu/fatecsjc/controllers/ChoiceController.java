@@ -1,9 +1,8 @@
 package br.edu.fatecsjc.controllers;
 
 import br.edu.fatecsjc.models.Choice;
-import br.edu.fatecsjc.models.views.AccountView;
 import br.edu.fatecsjc.models.views.ChoiceView;
-import br.edu.fatecsjc.services.impl.ChoiceServiceImpl;
+import br.edu.fatecsjc.services.ChoiceService;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ChoiceController {
 
     @Autowired
-    private ChoiceServiceImpl choiceService;
+    private ChoiceService choiceService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @JsonView(ChoiceView.ChoiceSimple.class)

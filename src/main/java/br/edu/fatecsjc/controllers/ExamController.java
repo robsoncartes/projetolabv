@@ -1,9 +1,8 @@
 package br.edu.fatecsjc.controllers;
 
 import br.edu.fatecsjc.models.Exam;
-import br.edu.fatecsjc.models.views.AccountView;
 import br.edu.fatecsjc.models.views.ExamView;
-import br.edu.fatecsjc.services.impl.ExamServiceImpl;
+import br.edu.fatecsjc.services.ExamService;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ExamController {
 
     @Autowired
-    private ExamServiceImpl examService;
+    private ExamService examService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @JsonView(ExamView.ExamSimple.class)

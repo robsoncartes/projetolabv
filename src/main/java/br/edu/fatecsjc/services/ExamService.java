@@ -1,16 +1,45 @@
 package br.edu.fatecsjc.services;
 
 import br.edu.fatecsjc.models.Exam;
+import br.edu.fatecsjc.repositories.ExamRepository;
+import br.edu.fatecsjc.services.exceptions.ObjectNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
+@Service
+public class ExamService {
 
-public interface ExamService {
+    @Autowired
+    private ExamRepository examRepository;
 
-    Exam findById(Integer id);
+    public Exam findById(Integer id) {
 
-    void saveExam(Exam exam);
+        Exam exam = examRepository.findById(id).orElse(null);
 
-    void saveExams(List<Exam> exams);
+        if (exam == null)
+            throw new ObjectNotFoundException("Exam not found. Id: " + id + ", Type: " + Exam.class.getName());
 
-    Iterable<Exam> findExams();
+        return exam;
+    }
+
+    public boolean isExamAvailable(String examTitle) {
+
+        for (Exam exam : findExams()) {
+            if (exam.getTitle().equals(examTitle))
+                return false;
+        }
+
+        return true;
+    }
+
+    public void saveExam(Exam exam) {
+
+        if (isExamAvailable(exam.getTitle()))
+            examRepository.save(exam);
+    }
+
+    public Iterable<Exam> findExams() {
+
+        return examRepository.findAll();
+    }
 }

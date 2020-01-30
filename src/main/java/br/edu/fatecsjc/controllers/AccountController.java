@@ -2,7 +2,7 @@ package br.edu.fatecsjc.controllers;
 
 import br.edu.fatecsjc.models.Account;
 import br.edu.fatecsjc.models.views.AccountView;
-import br.edu.fatecsjc.services.impl.AccountServiceImpl;
+import br.edu.fatecsjc.services.AccountService;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ import java.net.URI;
 public class AccountController {
 
     @Autowired
-    private AccountServiceImpl accountService;
+    private AccountService accountService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @JsonView(AccountView.AccountLogin.class)

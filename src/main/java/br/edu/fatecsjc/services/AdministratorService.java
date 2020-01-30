@@ -1,16 +1,34 @@
 package br.edu.fatecsjc.services;
 
 import br.edu.fatecsjc.models.Administrator;
+import br.edu.fatecsjc.repositories.AdministratorRepository;
+import br.edu.fatecsjc.services.exceptions.ObjectNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
+@Service
+public class AdministratorService {
 
-public interface AdministratorService {
+    @Autowired
+    private AdministratorRepository administratorRepository;
 
-    Administrator findById(Long id);
+    public Administrator findById(Long id) {
 
-    Administrator saveAdministrator(Administrator administrator);
+        Administrator administrator = administratorRepository.findById(id).orElse(null);
 
-    void saveAdministrators(List<Administrator> administrators);
+        if (administrator == null)
+            throw new ObjectNotFoundException("Administrator not found. Id: " + id + ", Type: " + Administrator.class.getName());
 
-    Iterable<Administrator> findAdministrators();
+        return administrator;
+    }
+
+    public Administrator saveAdministrator(Administrator administrator) {
+        administrator.setId(null);
+        return administratorRepository.save(administrator);
+    }
+
+    public Iterable<Administrator> findAdministrators() {
+
+        return administratorRepository.findAll();
+    }
 }

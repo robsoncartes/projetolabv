@@ -2,7 +2,7 @@ package br.edu.fatecsjc.controllers;
 
 import br.edu.fatecsjc.models.Activity;
 import br.edu.fatecsjc.models.views.ActivityView;
-import br.edu.fatecsjc.services.impl.ActivityServiceImpl;
+import br.edu.fatecsjc.services.ActivityService;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ActivityController {
 
     @Autowired
-    private ActivityServiceImpl activityService;
+    private ActivityService activityService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @JsonView(ActivityView.ActivitySimple.class)

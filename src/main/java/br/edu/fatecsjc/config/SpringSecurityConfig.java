@@ -3,8 +3,8 @@ package br.edu.fatecsjc.config;
 import br.edu.fatecsjc.security.JWTAuthenticationFilter;
 import br.edu.fatecsjc.security.JWTAuthorizationFilter;
 import br.edu.fatecsjc.security.JWTUtil;
+import br.edu.fatecsjc.services.exceptions.JWTAccountDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -15,7 +15,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -35,9 +34,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private Environment environment;
 
-    @Qualifier("JWTAccountDetailsService")
+    // @Qualifier("JWTAccountDetailsService")
     @Autowired
-    private UserDetailsService userDetailsService;
+    private JWTAccountDetailsService userDetailsService;
 
     @Autowired
     private JWTUtil jwtUtil;
@@ -59,7 +58,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
             "/login/**"
     };
 
-    public SpringSecurityConfig(Environment environment, @Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService, JWTUtil jwtUtil) {
+    public SpringSecurityConfig(Environment environment, JWTAccountDetailsService userDetailsService, JWTUtil jwtUtil) {
         this.environment = environment;
         this.userDetailsService = userDetailsService;
         this.jwtUtil = jwtUtil;

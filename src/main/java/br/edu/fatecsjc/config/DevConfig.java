@@ -1,6 +1,6 @@
 package br.edu.fatecsjc.config;
 
-import br.edu.fatecsjc.services.impl.DBServiceImpl;
+import br.edu.fatecsjc.services.DBService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Profile;
 public class DevConfig {
 
     @Autowired
-    private DBServiceImpl dbService;
+    private DBService dbService;
 
     @Value("${spring.jpa.hibernate.ddl-auto}")
     private String strategy;

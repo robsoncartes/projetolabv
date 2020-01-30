@@ -1,16 +1,34 @@
 package br.edu.fatecsjc.services;
 
 import br.edu.fatecsjc.models.User;
+import br.edu.fatecsjc.repositories.UserRepository;
+import br.edu.fatecsjc.services.exceptions.ObjectNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
+@Service
+public class UserService {
 
-public interface UserService {
+    @Autowired
+    private UserRepository userRepository;
 
-    User findById(Long id);
+    public User findById(Long id) {
 
-    User saveUser(User user);
+        User user = userRepository.findById(id).orElse(null);
 
-    void saveUsers(List<User> users);
+        if (user == null)
+            throw new ObjectNotFoundException("User not found. Id: " + id + ", Type: " + User.class.getName());
 
-    Iterable<User> findUsers();
+        return user;
+    }
+
+    public User saveUser(User user) {
+        user.setId(null);
+        return userRepository.save(user);
+    }
+
+    public Iterable<User> findUsers() {
+
+        return userRepository.findAll();
+    }
 }
