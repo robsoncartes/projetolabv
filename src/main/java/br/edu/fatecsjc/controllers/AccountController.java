@@ -20,7 +20,7 @@ public class AccountController {
     private AccountService accountService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    @JsonView(AccountView.AccountLogin.class)
+    @JsonView(AccountView.AccountComplete.class)
     public ResponseEntity<Account> findAccountById(@PathVariable Long id) {
 
         Account account = accountService.findById(id);
@@ -29,6 +29,7 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/email", method = RequestMethod.GET)
+    @JsonView(AccountView.AccountComplete.class)
     public ResponseEntity<Account> findAccountByEmail(@RequestParam(value = "value") String email) {
 
         Account account = accountService.findByEmail(email);
@@ -37,7 +38,7 @@ public class AccountController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    @JsonView(AccountView.AccountComplete.class)
+    @JsonView(AccountView.AccountLogin.class)
     public ResponseEntity<Iterable<Account>> findAllAccounts() {
 
         Iterable<Account> accounts = accountService.findAccounts();

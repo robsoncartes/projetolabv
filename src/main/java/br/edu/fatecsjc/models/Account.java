@@ -18,21 +18,21 @@ public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView(AccountView.AccountLogin.class)
+    @JsonView({AccountView.AccountLogin.class})
     private Long id;
 
-    @JsonView(AccountView.AccountLogin.class)
+    @JsonView({AccountView.AccountLogin.class})
+    @Column(unique = true)
     private String email;
 
-    @JsonView(AccountView.AccountLogin.class)
+    @JsonView({AccountView.AccountLogin.class})
     private String username;
 
-    @JsonView(AccountView.AccountComplete.class)
+    @JsonView({AccountView.AccountComplete.class})
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "authority_names")
-    @JsonView(AccountView.AccountComplete.class)
     private Set<Integer> authorities = new HashSet<>();
 
     public Account() {
@@ -52,6 +52,7 @@ public class Account {
         authorities.add(authorityName.getCode());
     }
 
+    @JsonView(AccountView.AccountComplete.class)
     public Set<AuthorityName> getAuthorityNames() {
         return authorities.stream().map(AuthorityName::toEnum).collect(Collectors.toSet());
     }

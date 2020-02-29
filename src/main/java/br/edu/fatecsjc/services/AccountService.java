@@ -5,9 +5,11 @@ import br.edu.fatecsjc.models.enums.AuthorityName;
 import br.edu.fatecsjc.repositories.AccountRepository;
 import br.edu.fatecsjc.security.JWTAccount;
 import br.edu.fatecsjc.services.exceptions.AuthorizationException;
+import br.edu.fatecsjc.services.exceptions.DataIntegrityException;
 import br.edu.fatecsjc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AccountService {
@@ -48,10 +50,16 @@ public class AccountService {
         return account;
     }
 
+    @Transactional
     public Account saveAccount(Account account) {
 
-        account.setId(null);
-        return accountRepository.save(account);
+        Account obj = accountRepository.findByEmail(account.getEmail());
+
+        if (obj == null) {
+            account.setId(null);
+            return accountRepository.save(account);
+        } else
+            throw new DataIntegrityException("Email already exist");
     }
 
     public Iterable<Account> findAccounts() {
