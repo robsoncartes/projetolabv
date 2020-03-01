@@ -10,6 +10,10 @@ import br.edu.fatecsjc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.HandlerMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 @Service
 public class AccountService {
@@ -19,6 +23,9 @@ public class AccountService {
 
     @Autowired
     private JWTAccountService jwtAccountService;
+
+    @Autowired
+    private HttpServletRequest servletRequest;
 
     public Account findById(Long id) {
 
@@ -62,8 +69,27 @@ public class AccountService {
             throw new DataIntegrityException("Email already exist");
     }
 
+    public Account updateAccount(Account account) {
+
+        Map<String, String> map = (Map<String, String>) servletRequest.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
+        Long uriId = Long.parseLong(map.get("id"));
+
+        Account newAccount = accountRepository.findByEmail(account.getEmail());
+
+        if (newAccount != null && newAccount.getId().equals(uriId)){
+            updateData(newAccount, account);
+            return accountRepository.save(newAccount);
+        }else
+            throw new DataIntegrityException("Email existente");
+    }
+
     public Iterable<Account> findAccounts() {
 
         return accountRepository.findAll();
+    }
+
+    public void updateData(Account newAccount, Account account) {
+        newAccount.setUsername(account.getUsername());
+        newAccount.setEmail(account.getEmail());
     }
 }
