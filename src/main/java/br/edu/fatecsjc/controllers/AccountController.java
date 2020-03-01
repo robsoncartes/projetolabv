@@ -5,11 +5,11 @@ import br.edu.fatecsjc.models.views.AccountView;
 import br.edu.fatecsjc.services.AccountService;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.net.URI;
 
@@ -38,15 +38,6 @@ public class AccountController {
         return ResponseEntity.ok().body(account);
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    @JsonView(AccountView.AccountLogin.class)
-    public ResponseEntity<Iterable<Account>> findAllAccounts() {
-
-        Iterable<Account> accounts = accountService.findAccounts();
-
-        return ResponseEntity.ok().body(accounts);
-    }
-
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> insertAccount(@Valid @RequestBody Account account) {
 
@@ -58,11 +49,32 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> updateAccount(@Valid @RequestBody Account account, @PathVariable Long id){
+    public ResponseEntity<Void> updateAccount(@Valid @RequestBody Account account, @PathVariable Long id) {
 
         account.setId(id);
         accountService.updateAccount(account);
 
         return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    @JsonView(AccountView.AccountLogin.class)
+    public ResponseEntity<Iterable<Account>> findAllAccounts() {
+
+        Iterable<Account> accounts = accountService.findAccounts();
+
+        return ResponseEntity.ok().body(accounts);
+    }
+
+    @RequestMapping(value = "/page", method = RequestMethod.GET)
+    public ResponseEntity<Page<Account>> findPage(
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
+            @RequestParam(value = "orderBy", defaultValue = "username") String orderBy,
+            @RequestParam(value = "direction", defaultValue = "ASC") String direction) {
+
+        Page<Account> accounts = accountService.searchPage(page, linesPerPage, orderBy, direction);
+
+        return ResponseEntity.ok().body(accounts);
     }
 }

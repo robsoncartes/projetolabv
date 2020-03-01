@@ -8,6 +8,9 @@ import br.edu.fatecsjc.services.exceptions.AuthorizationException;
 import br.edu.fatecsjc.services.exceptions.DataIntegrityException;
 import br.edu.fatecsjc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.HandlerMapping;
@@ -76,11 +79,16 @@ public class AccountService {
 
         Account newAccount = accountRepository.findByEmail(account.getEmail());
 
-        if (newAccount != null && newAccount.getId().equals(uriId)){
+        if (newAccount != null && newAccount.getId().equals(uriId)) {
             updateData(newAccount, account);
             return accountRepository.save(newAccount);
-        }else
+        } else
             throw new DataIntegrityException("Email existente");
+    }
+
+    public void updateData(Account newAccount, Account account) {
+        newAccount.setUsername(account.getUsername());
+        newAccount.setEmail(account.getEmail());
     }
 
     public Iterable<Account> findAccounts() {
@@ -88,8 +96,10 @@ public class AccountService {
         return accountRepository.findAll();
     }
 
-    public void updateData(Account newAccount, Account account) {
-        newAccount.setUsername(account.getUsername());
-        newAccount.setEmail(account.getEmail());
+    public Page<Account> searchPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+
+        return accountRepository.findAll(pageRequest);
     }
 }

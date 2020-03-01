@@ -1,13 +1,14 @@
 package br.edu.fatecsjc.repositories;
 
 import br.edu.fatecsjc.models.Account;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface AccountRepository extends CrudRepository<Account, Long> {
+public interface AccountRepository extends JpaRepository<Account, Long> {
 
     Optional<Account> findById(Long id);
 
@@ -17,5 +18,5 @@ public interface AccountRepository extends CrudRepository<Account, Long> {
     <S extends Account> S save(S entity);
 
     @Override
-    Iterable<Account> findAll();
+    List<Account> findAll();
 }
