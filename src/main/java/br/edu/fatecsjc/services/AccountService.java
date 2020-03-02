@@ -8,6 +8,7 @@ import br.edu.fatecsjc.services.exceptions.AuthorizationException;
 import br.edu.fatecsjc.services.exceptions.DataIntegrityException;
 import br.edu.fatecsjc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -89,6 +90,17 @@ public class AccountService {
     public void updateData(Account newAccount, Account account) {
         newAccount.setUsername(account.getUsername());
         newAccount.setEmail(account.getEmail());
+    }
+
+    public void deleteAccountById(Long id){
+
+        findById(id);
+
+        try {
+            accountRepository.deleteById(id);
+        }catch (DataIntegrityViolationException e){
+            throw new DataIntegrityException("It is not possible to delete the informed account because there are related entities");
+        }
     }
 
     public Iterable<Account> findAccounts() {

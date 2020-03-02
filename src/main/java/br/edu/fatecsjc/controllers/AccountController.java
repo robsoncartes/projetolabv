@@ -39,6 +39,7 @@ public class AccountController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
+    @JsonView(AccountView.AccountComplete.class)
     public ResponseEntity<Void> insertAccount(@Valid @RequestBody Account account) {
 
         Account obj = accountService.saveAccount(account);
@@ -53,6 +54,14 @@ public class AccountController {
 
         account.setId(id);
         accountService.updateAccount(account);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> deleteAccount(@PathVariable Long id) {
+
+        accountService.deleteAccountById(id);
 
         return ResponseEntity.noContent().build();
     }
