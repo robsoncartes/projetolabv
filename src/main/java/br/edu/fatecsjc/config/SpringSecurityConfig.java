@@ -58,12 +58,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
             "/login/**"
     };
 
-    public SpringSecurityConfig(Environment environment, JWTAccountDetailsService userDetailsService, JWTUtil jwtUtil) {
-        this.environment = environment;
-        this.userDetailsService = userDetailsService;
-        this.jwtUtil = jwtUtil;
-    }
-
     /**
      * Override this method to configure the {@link HttpSecurity}. Typically subclasses
      * should not invoke this method by calling super as it may override their
