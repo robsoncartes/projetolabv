@@ -42,8 +42,7 @@ public class AccountController {
     @JsonView(AccountView.AccountComplete.class)
     public ResponseEntity<Void> insertAccount(@Valid @RequestBody Account account) {
 
-        Account newAccount = accountService.newAccount(account);
-        Account obj = accountService.saveAccount(newAccount);
+        Account obj = accountService.saveAccount(account);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 

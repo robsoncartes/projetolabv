@@ -119,9 +119,4 @@ public class AccountService {
 
         return accountRepository.findAll(pageRequest);
     }
-
-    public Account newAccount(Account account){
-
-        return new Account(null, account.getEmail(), account.getUsername(), account.getPassword());
-    }
 }
