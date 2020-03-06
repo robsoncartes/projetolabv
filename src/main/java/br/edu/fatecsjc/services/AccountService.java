@@ -12,6 +12,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.HandlerMapping;
@@ -30,6 +31,9 @@ public class AccountService {
 
     @Autowired
     private HttpServletRequest servletRequest;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     public Account findById(Long id) {
 
@@ -68,6 +72,7 @@ public class AccountService {
 
         if (obj == null) {
             account.setId(null);
+            account.setPassword(passwordEncoder.encode(account.getPassword()));
             return accountRepository.save(account);
         } else
             throw new DataIntegrityException("Email already exist");
@@ -92,13 +97,13 @@ public class AccountService {
         newAccount.setEmail(account.getEmail());
     }
 
-    public void deleteAccountById(Long id){
+    public void deleteAccountById(Long id) {
 
         findById(id);
 
         try {
             accountRepository.deleteById(id);
-        }catch (DataIntegrityViolationException e){
+        } catch (DataIntegrityViolationException e) {
             throw new DataIntegrityException("It is not possible to delete the informed account because there are related entities");
         }
     }
@@ -113,5 +118,10 @@ public class AccountService {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
 
         return accountRepository.findAll(pageRequest);
+    }
+
+    public Account newAccount(Account account){
+
+        return new Account(null, account.getEmail(), account.getUsername(), account.getPassword());
     }
 }

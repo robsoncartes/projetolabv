@@ -36,8 +36,8 @@ public class DBService {
 
     public void instantiateTestDatabase() throws Exception {
 
-        Administrator account1 = new Administrator(null, "email1", "admin1", passwordEncoder.encode("pass"));
-        User account2 = new User(null, "email2", "user1", passwordEncoder.encode("pass"));
+        Administrator account1 = new Administrator(null, "email1", "admin1", "pass");
+        User account2 = new User(null, "email2", "user1", "pass");
         account1.addAuthorityName(AuthorityName.ADMINISTRATOR);
         List<Account> accounts = new ArrayList<>(Arrays.asList(account1, account2));
         for (Account account : accounts) accountService.saveAccount(account);

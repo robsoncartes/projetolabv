@@ -45,7 +45,6 @@ public class Account {
         this.username = username;
         this.password = password;
         addAuthorityName(AuthorityName.USER);
-
     }
 
     public void addAuthorityName(AuthorityName authorityName) {

@@ -52,7 +52,7 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(AuthorizationException.class)
     public ResponseEntity<StandardError> authorization(AuthorizationException e, HttpServletRequest request) {
 
-        StandardError error = new StandardError(System.currentTimeMillis(), HttpStatus.FORBIDDEN.value(), "Access denied.", e.getMessage(), request.getRequestURI());
+        StandardError error = new StandardError(System.currentTimeMillis(), HttpStatus.FORBIDDEN.value(), "Forbidden.", e.getMessage(), request.getRequestURI());
 
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
     }
@@ -61,7 +61,7 @@ public class ControllerExceptionHandler {
     public ResponseEntity<StandardError> fileExceptionHandler(FileException e, HttpServletRequest request) {
 
         StandardError error = new StandardError(
-                System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(), "Erro de arquivo.", e.getMessage(), request.getRequestURI());
+                System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(), "File error.", e.getMessage(), request.getRequestURI());
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
