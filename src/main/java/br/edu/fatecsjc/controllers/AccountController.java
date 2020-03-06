@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -75,6 +76,7 @@ public class AccountController {
         return ResponseEntity.ok().body(accounts);
     }
 
+    @PreAuthorize("hasAnyRole('ADMINISTRATOR')")
     @RequestMapping(value = "/page", method = RequestMethod.GET)
     public ResponseEntity<Page<Account>> findPage(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
