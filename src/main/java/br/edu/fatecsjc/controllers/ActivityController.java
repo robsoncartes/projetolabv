@@ -6,10 +6,10 @@ import br.edu.fatecsjc.services.ActivityService;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController("ActivityController")
 @RequestMapping(value = "/activities")
@@ -28,11 +28,20 @@ public class ActivityController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    @JsonView(ActivityView.ActivityComplete.class)
+    @JsonView(ActivityView.ActivitySimple.class)
     public ResponseEntity<Iterable<Activity>> findAllActivities() {
 
         Iterable<Activity> activities = activityService.findActivities();
 
         return ResponseEntity.ok().body(activities);
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Void> insertActivity(@RequestBody Activity activity){
+
+        Activity obj = activityService.saveActivity(activity);
+
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 }

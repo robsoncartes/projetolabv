@@ -2,6 +2,7 @@ package br.edu.fatecsjc.services;
 
 import br.edu.fatecsjc.models.Activity;
 import br.edu.fatecsjc.repositories.ActivityRepository;
+import br.edu.fatecsjc.services.exceptions.DataIntegrityException;
 import br.edu.fatecsjc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,10 +33,11 @@ public class ActivityService {
         return true;
     }
 
-    public void saveActivity(Activity activity) {
+    public Activity saveActivity(Activity activity) {
 
         if (isActivityAvailable(activity.getUsername(), activity.getExamTitle()))
-            activityRepository.save(activity);
+            return activityRepository.save(activity);
+        throw new DataIntegrityException("User already saved an Activitie with this title");
     }
 
     public Iterable<Activity> findActivities() {
