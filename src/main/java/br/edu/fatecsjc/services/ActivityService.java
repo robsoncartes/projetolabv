@@ -35,7 +35,9 @@ public class ActivityService {
 
     public Activity saveActivity(Activity activity) {
 
-        if (isActivityAvailable(activity.getUsername(), activity.getExamTitle()))
+        boolean isValid = isActivityAvailable(activity.getUsername(), activity.getExamTitle());
+
+        if (isValid)
             return activityRepository.save(activity);
         throw new DataIntegrityException("User already saved an Activitie with this title");
     }
