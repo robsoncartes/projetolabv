@@ -2,10 +2,12 @@ package br.edu.fatecsjc.models;
 
 import br.edu.fatecsjc.models.views.ActivityView;
 import br.edu.fatecsjc.models.views.ExamView;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,10 +24,13 @@ public class Activity {
     @JsonView(ActivityView.ActivitySimple.class)
     private String username;
 
+    @ManyToMany()
+    @JoinTable(name = "activity_account", joinColumns = @JoinColumn(name = "activity_id"), inverseJoinColumns = @JoinColumn(name = "account_id"))
+    private List<Account> accounts = new ArrayList<>();
+
     @JsonView({ActivityView.ActivitySimple.class, ExamView.ExamComplete.class})
     private String examTitle;
 
-    // @JsonIgnore
     @OneToMany(mappedBy = "activity")
     @JsonView(ActivityView.ActivityComplete.class)
     private List<Choice> choices = new LinkedList<>();
@@ -59,5 +64,9 @@ public class Activity {
         }
 
         return false;
+    }
+
+    public void addAccount(Account account) {
+        this.getAccounts().add(account);
     }
 }
