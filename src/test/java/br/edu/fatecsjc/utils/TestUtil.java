@@ -1,4 +1,4 @@
-package utils;
+package br.edu.fatecsjc.utils;
 
 import org.junit.Before;
 
@@ -10,6 +10,7 @@ import java.util.Locale;
 import java.util.Set;
 
 public class TestUtil {
+
     @Before
     public void beforeSetLocale() {
         Locale.setDefault(new Locale("en", "EN"));
