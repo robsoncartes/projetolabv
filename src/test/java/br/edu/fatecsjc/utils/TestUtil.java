@@ -16,14 +16,14 @@ public class TestUtil {
         Locale.setDefault(new Locale("en", "EN"));
     }
 
-    protected Set<ConstraintViolation<Object>> getErrorObject(Object object) {
+    public Set<ConstraintViolation<Object>> getErrorObject(Object object) {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
 
         return validator.validate(object);
     }
 
-    protected int getErrorSize(Object object) {
+    public int getErrorSize(Object object) {
         Set<ConstraintViolation<Object>> constraintViolations = getErrorObject(object);
         return constraintViolations.size();
     }
