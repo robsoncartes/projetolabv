@@ -72,4 +72,14 @@ public class AccountTest extends TestUtil {
         assertEquals(1, getErrorSize(account));
         assertEquals("size must be between 4 and 20", getErrorMessage(account));
     }
+
+    @Test
+    public void accountShouldNotBeValidWithUsernameLengthGreaterThan() {
+
+        Account account = AccountFactory.validAccount(new Account());
+
+        account.setUsername("123456789012345678901");
+        assertEquals(1, getErrorSize(account));
+        assertEquals("size must be between 4 and 20", getErrorMessage(account));
+    }
 }
