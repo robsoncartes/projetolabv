@@ -39,6 +39,7 @@ public class Account {
     private String username;
 
     @JsonView({AccountView.AccountComplete.class})
+    @NotNull
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
