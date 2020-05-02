@@ -84,12 +84,22 @@ public class AccountTest extends TestUtil {
     }
 
     @Test
-    public void accountShouldNotBeValidWithPasswordEqualsNull(){
+    public void accountShouldNotBeValidWithPasswordEqualsNull() {
 
         Account account = AccountFactory.validAccount(new Account());
 
         account.setPassword(null);
         assertEquals(1, getErrorSize(account));
         assertEquals("must not be null", getErrorMessage(account));
+    }
+
+    @Test
+    public void accountShouldNotBeValidWithPasswordLengthLessThan() {
+
+        Account account = AccountFactory.validAccount(new Account());
+
+        account.setPassword("123");
+        assertEquals(1, getErrorSize(account));
+        assertEquals("size must be between 4 and 60", getErrorMessage(account));
     }
 }

@@ -40,6 +40,7 @@ public class Account {
 
     @JsonView({AccountView.AccountComplete.class})
     @NotNull
+    @Size(min = 4, max = 60)
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
