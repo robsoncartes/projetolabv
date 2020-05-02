@@ -33,6 +33,7 @@ public class Account {
     private String email;
 
     @JsonView({AccountView.AccountLogin.class})
+    @NotNull
     private String username;
 
     @JsonView({AccountView.AccountComplete.class})

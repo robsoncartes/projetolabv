@@ -51,4 +51,16 @@ public class AccountTest extends TestUtil {
         assertEquals("must be a well-formed email address", getErrorMessage(account));
 
     }
+
+
+    @Test
+    public void accountShouldNotBeValidWithUsernameEqualsNull() {
+
+        Account account = AccountFactory.validAccount(new Account());
+
+        account.setUsername(null);
+        assertEquals(1, getErrorSize(account));
+        assertEquals("must not be null", getErrorMessage(account));
+    }
+
 }
