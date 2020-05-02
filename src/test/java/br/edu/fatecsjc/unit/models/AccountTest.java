@@ -9,8 +9,6 @@ import pl.pojo.tester.api.assertion.Method;
 import static org.junit.Assert.assertEquals;
 import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
 
-import br.edu.fatecsjc.utils.TestUtil.*;
-
 public class AccountTest extends TestUtil {
 
     @Test

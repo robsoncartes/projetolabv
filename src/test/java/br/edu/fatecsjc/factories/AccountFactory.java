@@ -12,7 +12,7 @@ public class AccountFactory {
 
         account.setId(1L);
         account.setUsername("user1");
-        account.setEmail("email1");
+        account.setEmail("email1@gmail.com");
         account.setPassword("pass");
 
         Set<Integer> authorityNames = new HashSet<>();

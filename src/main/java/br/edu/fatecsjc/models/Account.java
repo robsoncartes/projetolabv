@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -25,6 +27,8 @@ public class Account {
     private Long id;
 
     @JsonView({AccountView.AccountLogin.class})
+    @NotNull
+    @Email
     @Column(unique = true)
     private String email;
 

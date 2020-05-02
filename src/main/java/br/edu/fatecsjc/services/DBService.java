@@ -32,8 +32,8 @@ public class DBService {
 
     public void instantiateTestDatabase() throws Exception {
 
-        Administrator account1 = new Administrator(null, "email1", "admin1", "pass");
-        User account2 = new User(null, "email2", "user1", "pass");
+        Administrator account1 = new Administrator(null, "email1@gmail.com", "admin1", "pass");
+        User account2 = new User(null, "email2@gmail.com", "user1", "pass");
         account1.addAuthorityName(AuthorityName.ADMINISTRATOR);
 
         Exam exam1 = new Exam(null, "Android Basic Quis", "Android Basic Test", "Online Android Test", account1.getUsername());
