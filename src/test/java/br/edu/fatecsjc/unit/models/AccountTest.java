@@ -41,4 +41,14 @@ public class AccountTest extends TestUtil {
         Account validAccount = AccountFactory.validAccount(new Account());
         assertEquals(0, getErrorSize(validAccount));
     }
+
+    @Test
+    public void accountShouldBeNotValidWithInvalidEmail() {
+
+        Account account = AccountFactory.validAccount(new Account());
+        account.setEmail("email1");
+        assertEquals(1, getErrorSize(account));
+        assertEquals("must be a well-formed email address", getErrorMessage(account));
+
+    }
 }
