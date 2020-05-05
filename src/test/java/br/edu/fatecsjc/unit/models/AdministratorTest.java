@@ -5,6 +5,7 @@ import br.edu.fatecsjc.utils.TestUtil;
 import org.junit.Test;
 import pl.pojo.tester.api.assertion.Method;
 
+import static pl.pojo.tester.api.FieldPredicate.exclude;
 import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
 
 public class AdministratorTest extends TestUtil {
@@ -30,7 +31,7 @@ public class AdministratorTest extends TestUtil {
 
         final Class<?> classUnderTest = Administrator.class;
 
-        assertPojoMethodsFor(classUnderTest).testing(Method.SETTER).areWellImplemented();
+        assertPojoMethodsFor(classUnderTest, exclude("password")).testing(Method.SETTER).areWellImplemented();
     }
 
     @Test
