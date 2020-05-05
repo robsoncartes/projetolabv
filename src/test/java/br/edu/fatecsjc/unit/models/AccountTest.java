@@ -7,6 +7,7 @@ import org.junit.Test;
 import pl.pojo.tester.api.assertion.Method;
 
 import static org.junit.Assert.assertEquals;
+import static pl.pojo.tester.api.FieldPredicate.exclude;
 import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
 
 public class AccountTest extends TestUtil {
@@ -32,7 +33,7 @@ public class AccountTest extends TestUtil {
 
         final Class<?> classUnderTest = Account.class;
 
-        assertPojoMethodsFor(classUnderTest).testing(Method.SETTER).areWellImplemented();
+        assertPojoMethodsFor(classUnderTest, exclude("password")).testing(Method.SETTER).areWellImplemented();
     }
 
     @Test
