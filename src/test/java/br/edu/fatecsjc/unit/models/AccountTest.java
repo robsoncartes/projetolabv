@@ -36,6 +36,30 @@ public class AccountTest extends TestUtil {
     }
 
     @Test
+    public void accountTestPojoHashCode(){
+
+        final Class<?> classUnderTest = Account.class;
+
+        assertPojoMethodsFor(classUnderTest).testing(Method.HASH_CODE).areWellImplemented();
+    }
+
+    @Test
+    public void accountTestPojoEquals(){
+
+        final Class<?> classUnderTest = Account.class;
+
+        assertPojoMethodsFor(classUnderTest).testing(Method.EQUALS).areWellImplemented();
+    }
+
+    @Test
+    public void accountTestPojoToString(){
+
+        final Class<?> classUnderTest = Account.class;
+
+        assertPojoMethodsFor(classUnderTest).testing(Method.TO_STRING).areWellImplemented();
+    }
+
+    @Test
     public void accountShouldBeValid() {
 
         Account validAccount = AccountFactory.validAccount(new Account());
@@ -49,7 +73,6 @@ public class AccountTest extends TestUtil {
         account.setEmail("email1");
         assertEquals(1, getErrorSize(account));
         assertEquals("must be a well-formed email address", getErrorMessage(account));
-
     }
 
 
