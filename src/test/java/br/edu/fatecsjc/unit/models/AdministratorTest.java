@@ -1,10 +1,12 @@
 package br.edu.fatecsjc.unit.models;
 
+import br.edu.fatecsjc.factories.AdministratorFactory;
 import br.edu.fatecsjc.models.Administrator;
 import br.edu.fatecsjc.utils.TestUtil;
 import org.junit.Test;
 import pl.pojo.tester.api.assertion.Method;
 
+import static org.junit.Assert.assertEquals;
 import static pl.pojo.tester.api.FieldPredicate.exclude;
 import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
 
@@ -56,5 +58,12 @@ public class AdministratorTest extends TestUtil {
         final Class<?> classUnderTest = Administrator.class;
 
         assertPojoMethodsFor(classUnderTest).testing(Method.TO_STRING).areWellImplemented();
+    }
+
+    @Test
+    public void administratorShouldBeValid() {
+
+        Administrator validAdministrator = AdministratorFactory.validAdministrator();
+        assertEquals(0, getErrorSize(validAdministrator));
     }
 }

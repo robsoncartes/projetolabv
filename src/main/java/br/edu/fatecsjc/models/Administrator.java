@@ -14,6 +14,9 @@ import javax.persistence.Table;
 @EqualsAndHashCode(callSuper = false)
 public class Administrator extends Account {
 
+    public Administrator() {
+    }
+
     public Administrator(Long id, String email, String username, String password) {
         super(id, email, username, password);
     }
