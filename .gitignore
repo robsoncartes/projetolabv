@@ -1,3 +1,5 @@
 .idea/*
 target/*
 ProjetoLabV.iml
+/bin/
+/target/
