@@ -11,8 +11,8 @@ public class AccountFactory {
     public static Account validAccount(Account account) {
 
         account.setId(1L);
-        account.setUsername("user1");
-        account.setEmail("email1@gmail.com");
+        account.setUsername("user3");
+        account.setEmail("email3@gmail.com");
         account.setPassword("pass");
 
         Set<Integer> authorityNames = new HashSet<>();
