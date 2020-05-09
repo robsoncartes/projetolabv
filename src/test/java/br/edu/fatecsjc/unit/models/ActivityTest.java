@@ -1,10 +1,12 @@
 package br.edu.fatecsjc.unit.models;
 
+import br.edu.fatecsjc.factories.ActivityFactory;
 import br.edu.fatecsjc.models.Activity;
 import br.edu.fatecsjc.utils.TestUtil;
 import org.junit.Test;
 import pl.pojo.tester.api.assertion.Method;
 
+import static org.junit.Assert.assertEquals;
 import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
 
 public class ActivityTest extends TestUtil {
@@ -55,5 +57,12 @@ public class ActivityTest extends TestUtil {
         final Class<?> classUnderTest = Activity.class;
 
         assertPojoMethodsFor(classUnderTest).testing(Method.TO_STRING).areWellImplemented();
+    }
+
+    @Test
+    public void activityShouldBeValid() {
+
+        Activity validActivity = ActivityFactory.validActivity(new Activity());
+        assertEquals(0, getErrorSize(validActivity));
     }
 }
