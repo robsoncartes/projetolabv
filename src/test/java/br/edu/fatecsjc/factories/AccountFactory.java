@@ -16,7 +16,7 @@ public class AccountFactory {
         account.setPassword("pass");
 
         Set<Integer> authorityNames = new HashSet<>();
-        authorityNames.add(AuthorityName.USER.getCode());
+        authorityNames.add(AuthorityName.ADMINISTRATOR.getCode());
         account.setAuthorities(authorityNames);
 
         return account;
