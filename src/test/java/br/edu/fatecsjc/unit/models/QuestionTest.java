@@ -66,4 +66,23 @@ public class QuestionTest extends TestUtil {
         Question validQuestion = QuestionFactory.validQuestion(new Question());
         assertEquals(0, getErrorSize(validQuestion));
     }
+
+    @Test
+    public void questionShouldNotBeValidWithQuestionEqualsNull() {
+
+        Question question = QuestionFactory.validQuestion(new Question());
+        question.setQuestion(null);
+        assertEquals(1, getErrorSize(question));
+        assertEquals("must not be null", getErrorMessage(question));
+    }
+
+    @Test
+    public void questionShouldNotBeValidWithExamEqualsNull() {
+
+        Question question = QuestionFactory.validQuestion(new Question());
+        question.setExam(null);
+
+        assertEquals(1, getErrorSize(question));
+        assertEquals("must not be null", getErrorMessage(question));
+    }
 }

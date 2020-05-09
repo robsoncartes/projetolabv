@@ -28,6 +28,7 @@ public class Question {
     @Getter
     @Setter
     @JsonView({QuestionView.QuestionSimple.class, ExamView.ExamComplete.class})
+    @NotNull
     private String question;
 
     @Getter
