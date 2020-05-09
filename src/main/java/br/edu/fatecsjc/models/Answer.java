@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
@@ -24,15 +25,18 @@ public class Answer {
     private Integer id;
 
     @JsonView({AnswerView.AnswerSimple.class, ExamView.ExamComplete.class, QuestionView.QuestionComplete.class})
+    @NotNull
     private String answer;
 
     @JsonView({AnswerView.AnswerComplete.class, QuestionView.QuestionComplete.class})
-    private boolean correct;
+    @NotNull
+    private Boolean correct;
 
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "question_id")
     @JsonView({AnswerView.AnswerComplete.class, ExamView.ExamComplete.class})
+    @NotNull
     private Question question;
 
     public boolean isValid(Answer answer) {

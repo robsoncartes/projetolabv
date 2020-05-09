@@ -65,4 +65,34 @@ public class AnswerTest extends TestUtil {
         Answer validAnswer = AnswerFactory.validAnswer(new Answer());
         assertEquals(0, getErrorSize(validAnswer));
     }
+
+    @Test
+    public void answerShouldNotBeValidWithAnswerEqualsNull() {
+
+        Answer answer = AnswerFactory.validAnswer(new Answer());
+
+        answer.setAnswer(null);
+        assertEquals(1, getErrorSize(answer));
+        assertEquals("must not be null", getErrorMessage(answer));
+    }
+
+    @Test
+    public void answerShouldNotBeValidWithCorrectEqualsNull() {
+
+        Answer answer = AnswerFactory.validAnswer(new Answer());
+
+        answer.setCorrect(null);
+        assertEquals(1, getErrorSize(answer));
+        assertEquals("must not be null", getErrorMessage(answer));
+    }
+
+    @Test
+    public void answerShouldNotBeValidWithQuestiontEqualsNull() {
+
+        Answer answer = AnswerFactory.validAnswer(new Answer());
+
+        answer.setQuestion(null);
+        assertEquals(1, getErrorSize(answer));
+        assertEquals("must not be null", getErrorMessage(answer));
+    }
 }
