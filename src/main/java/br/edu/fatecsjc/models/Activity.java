@@ -2,11 +2,11 @@ package br.edu.fatecsjc.models;
 
 import br.edu.fatecsjc.models.views.ActivityView;
 import br.edu.fatecsjc.models.views.ExamView;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,6 +22,7 @@ public class Activity {
     private Integer id;
 
     @JsonView(ActivityView.ActivitySimple.class)
+    @NotNull
     private String username;
 
     @ManyToMany()
@@ -29,6 +30,7 @@ public class Activity {
     private List<Account> accounts = new ArrayList<>();
 
     @JsonView({ActivityView.ActivitySimple.class, ExamView.ExamComplete.class})
+    @NotNull
     private String examTitle;
 
     @OneToMany(mappedBy = "activity")

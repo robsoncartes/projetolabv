@@ -65,4 +65,22 @@ public class ActivityTest extends TestUtil {
         Activity validActivity = ActivityFactory.validActivity(new Activity());
         assertEquals(0, getErrorSize(validActivity));
     }
+
+    @Test
+    public void activityShouldNotBeValidWIthUsernameEqualsNull() {
+
+        Activity activity = ActivityFactory.validActivity(new Activity());
+        activity.setUsername(null);
+        assertEquals(1, getErrorSize(activity));
+        assertEquals("must not be null", getErrorMessage(activity));
+    }
+
+    @Test
+    public void activityShouldNotBeValidwithExamTitleEqualsNull() {
+
+        Activity activity = ActivityFactory.validActivity(new Activity());
+        activity.setExamTitle(null);
+        assertEquals(1, getErrorSize(activity));
+        assertEquals("must not be null", getErrorMessage(activity));
+    }
 }
