@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,15 +20,19 @@ public class Exam {
     private Integer id;
 
     @JsonView(ExamView.ExamSimple.class)
+    @NotNull
     private String title;
 
     @JsonView(ExamView.ExamComplete.class)
+    @NotNull
     private String type;
 
     @JsonView(ExamView.ExamComplete.class)
+    @NotNull
     private String description;
 
     @JsonView(ExamView.ExamComplete.class)
+    @NotNull
     private String author;
 
     // @JsonIgnore

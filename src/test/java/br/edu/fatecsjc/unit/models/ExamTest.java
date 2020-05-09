@@ -65,4 +65,44 @@ public class ExamTest extends TestUtil {
         Exam validExam = ExamFactory.validExam(new Exam());
         assertEquals(0, getErrorSize(validExam));
     }
+
+    @Test
+    public void examShouldNotBeValidWIthTitleEqualsNull() {
+
+        Exam exam = ExamFactory.validExam(new Exam());
+
+        exam.setTitle(null);
+        assertEquals(1, getErrorSize(exam));
+        assertEquals("must not be null", getErrorMessage(exam));
+    }
+
+    @Test
+    public void examShouldNotBeValidWIthTypeEqualsNull() {
+
+        Exam exam = ExamFactory.validExam(new Exam());
+
+        exam.setType(null);
+        assertEquals(1, getErrorSize(exam));
+        assertEquals("must not be null", getErrorMessage(exam));
+    }
+
+    @Test
+    public void examShouldNotBeValidWIthDescriptionEqualsNull() {
+
+        Exam exam = ExamFactory.validExam(new Exam());
+
+        exam.setDescription(null);
+        assertEquals(1, getErrorSize(exam));
+        assertEquals("must not be null", getErrorMessage(exam));
+    }
+
+    @Test
+    public void examShouldNotBeValidWIthAuthorEqualsNull() {
+
+        Exam exam = ExamFactory.validExam(new Exam());
+
+        exam.setAuthor(null);
+        assertEquals(1, getErrorSize(exam));
+        assertEquals("must not be null", getErrorMessage(exam));
+    }
 }
