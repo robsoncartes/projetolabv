@@ -4,17 +4,18 @@ import br.edu.fatecsjc.models.views.ExamView;
 import br.edu.fatecsjc.models.views.QuestionView;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.LinkedList;
 import java.util.List;
 
 @Entity
 @Table(name = "questions")
 @NoArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class Question {
 
     @Id
@@ -46,6 +47,7 @@ public class Question {
     @Getter
     @Setter
     @JsonView({QuestionView.QuestionComplete.class, ExamView.ExamComplete.class})
+    @NotNull
     private Exam exam;
 
     public Question(Integer id, String question, Exam exam) {
