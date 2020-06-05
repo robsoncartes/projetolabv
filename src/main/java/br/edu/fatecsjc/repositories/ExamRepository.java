@@ -12,6 +12,8 @@ public interface ExamRepository extends CrudRepository<Exam, Integer> {
     @Override
     Optional<Exam> findById(Integer integer);
 
+    Exam findByTitle(String title);
+
     @Override
     <S extends Exam> S save(S entity);
 

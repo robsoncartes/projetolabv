@@ -21,6 +21,7 @@ public class Exam {
 
     @JsonView(ExamView.ExamSimple.class)
     @NotNull
+    @Column(unique = true)
     private String title;
 
     @JsonView(ExamView.ExamComplete.class)

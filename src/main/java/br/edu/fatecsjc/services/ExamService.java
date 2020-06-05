@@ -2,9 +2,12 @@ package br.edu.fatecsjc.services;
 
 import br.edu.fatecsjc.models.Exam;
 import br.edu.fatecsjc.repositories.ExamRepository;
+import br.edu.fatecsjc.services.exceptions.DataIntegrityException;
 import br.edu.fatecsjc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 
 @Service
 public class ExamService {
@@ -22,20 +25,21 @@ public class ExamService {
         return exam;
     }
 
-    public boolean isExamAvailable(String examTitle) {
+    @Transactional
+    public Exam saveExam(Exam exam) {
 
-        for (Exam exam : findExams()) {
-            if (exam.getTitle().equals(examTitle))
-                return false;
-        }
+        Exam obj = examRepository.findByTitle(exam.getTitle());
 
-        return true;
-    }
+        if (obj == null) {
+            exam.setId(null);
+            exam.setTitle(exam.getTitle());
+            exam.setType(exam.getType());
+            exam.setDescription(exam.getDescription());
+            exam.setAuthor(exam.getAuthor());
 
-    public void saveExam(Exam exam) {
-
-        if (isExamAvailable(exam.getTitle()))
-            examRepository.save(exam);
+            return examRepository.save(exam);
+        } else
+            throw new DataIntegrityException("There is already an exam with this title.");
     }
 
     public Iterable<Exam> findExams() {
