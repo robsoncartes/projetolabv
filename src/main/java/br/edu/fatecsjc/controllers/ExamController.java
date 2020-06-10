@@ -15,6 +15,7 @@ import java.net.URI;
 
 @RestController("ExamController")
 @RequestMapping(value = "/exams")
+@CrossOrigin(origins = "*")
 public class ExamController {
 
     @Autowired
