@@ -55,7 +55,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         response.addHeader("Authorization", "Bearer " + token);
         response.addHeader("access-control-expose-headers", "Authorization");
         response.addHeader("Username", email);
-        
+
         // Collection<String> headerNames = response.getHeaderNames();
         // System.err.println("HeadersNames: " + headerNames.toString());
         // System.err.println(response.getHeader("Username"));
