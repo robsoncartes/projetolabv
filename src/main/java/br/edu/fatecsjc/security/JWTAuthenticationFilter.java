@@ -2,6 +2,9 @@ package br.edu.fatecsjc.security;
 
 import br.edu.fatecsjc.models.Account;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Data;
+import org.apache.catalina.authenticator.SingleSignOnEntry;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -13,8 +16,9 @@ import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -51,6 +55,10 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         response.addHeader("Authorization", "Bearer " + token);
         response.addHeader("access-control-expose-headers", "Authorization");
         response.addHeader("Username", email);
+        
+        // Collection<String> headerNames = response.getHeaderNames();
+        // System.err.println("HeadersNames: " + headerNames.toString());
+        // System.err.println(response.getHeader("Username"));
     }
 
     private static class JWTAuthenticationFailureHandler implements AuthenticationFailureHandler {
@@ -71,9 +79,10 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         }
 
         private String json() {
-            long date = new Date().getTime();
 
-            return "{\"timestamp\": " + date + ", "
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+            return "{\"timestamp\": " + sdf.format(new Date().getTime()) + ", "
                     + "\"status\": 401, "
                     + "\"error\": \"Not authorized.\", "
                     + "\"message\": \"Authentication failed: Invalid email or password.\", "
