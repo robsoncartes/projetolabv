@@ -77,9 +77,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         if (Arrays.asList(environment.getActiveProfiles()).contains("test"))
             http.headers().frameOptions().disable();
 
-        http.cors().and().csrf().disable();
-
-        http.authorizeRequests()
+        http.cors().and().csrf().disable()
+                .authorizeRequests()
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
                 .antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll()
                 .antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
@@ -97,17 +96,17 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    CorsConfigurationSource getCorsConfigurationSource() {
-
-        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("POST", "GET", "OPTIONS"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-
         return source;
     }
 
     @Bean
     public BCryptPasswordEncoder getBCryptPasswordEncoder() {
-
         return new BCryptPasswordEncoder();
     }
 }

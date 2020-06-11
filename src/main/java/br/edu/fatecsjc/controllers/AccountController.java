@@ -16,6 +16,7 @@ import java.net.URI;
 
 @RestController("AccountController")
 @RequestMapping(value = "/accounts")
+@CrossOrigin(origins = "*")
 public class AccountController {
 
     @Autowired
