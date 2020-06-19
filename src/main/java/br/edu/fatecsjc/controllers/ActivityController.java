@@ -6,6 +6,7 @@ import br.edu.fatecsjc.services.ActivityService;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -36,6 +37,7 @@ public class ActivityController {
         return ResponseEntity.ok().body(activities);
     }
 
+    @PreAuthorize("hasAnyRole('USER')")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> insertActivity(@RequestBody Activity activity){
 
