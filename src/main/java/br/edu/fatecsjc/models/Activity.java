@@ -16,9 +16,9 @@ import java.util.List;
 @Data
 public class Activity {
 
+    @JsonView(ActivityView.ActivitySimple.class)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView(ActivityView.ActivitySimple.class)
     private Integer id;
 
     @JsonView(ActivityView.ActivitySimple.class)
@@ -33,8 +33,8 @@ public class Activity {
     @NotNull
     private String examTitle;
 
-    @OneToMany(mappedBy = "activity")
     @JsonView(ActivityView.ActivityComplete.class)
+    @OneToMany(mappedBy = "activity")
     private List<Choice> choices = new LinkedList<>();
 
     @JsonView(ActivityView.ActivityComplete.class)

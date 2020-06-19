@@ -14,9 +14,9 @@ import java.util.List;
 @Table(name = "exams")
 public class Exam {
 
+    @JsonView(ExamView.ExamSimple.class)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView(ExamView.ExamSimple.class)
     private Integer id;
 
     @JsonView(ExamView.ExamSimple.class)
@@ -36,14 +36,14 @@ public class Exam {
     @NotNull
     private String author;
 
+    @JsonView(ExamView.ExamComplete.class)
     // @JsonIgnore
     @OneToMany(mappedBy = "exam")
-    @JsonView(ExamView.ExamComplete.class)
     private List<Question> questions = new LinkedList<>();
 
+    @JsonView(ExamView.ExamComplete.class)
     @ManyToOne
     @JoinColumn(name = "activity_id")
-    @JsonView(ExamView.ExamComplete.class)
     private Activity activity;
 
     public Exam() {

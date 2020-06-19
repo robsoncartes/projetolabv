@@ -12,9 +12,9 @@ import javax.persistence.*;
 @Data
 public class Choice {
 
+    @JsonView({ChoiceView.ChoiceSimple.class, ActivityView.ActivityComplete.class})
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView({ChoiceView.ChoiceSimple.class, ActivityView.ActivityComplete.class})
     private Integer id;
 
     @JsonView({ChoiceView.ChoiceSimple.class, ActivityView.ActivityComplete.class})
@@ -26,9 +26,9 @@ public class Choice {
     @JsonView(ChoiceView.ChoiceComplete.class)
     private boolean correct;
 
+    // @JsonView(ChoiceView.ChoiceComplete.class)
     @ManyToOne
     @JoinColumn(name = "activity_id")
-    // @JsonView(ChoiceView.ChoiceComplete.class)
     private Activity activity;
 
     public Choice() {

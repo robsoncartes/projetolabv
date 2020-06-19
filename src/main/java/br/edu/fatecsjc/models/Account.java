@@ -22,9 +22,9 @@ import java.util.stream.Collectors;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Account {
 
+    @JsonView({AccountView.AccountLogin.class})
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView({AccountView.AccountLogin.class})
     private Long id;
 
     @JsonView({AccountView.AccountLogin.class})
@@ -47,9 +47,9 @@ public class Account {
     @CollectionTable(name = "authority_names")
     private Set<Integer> authorities = new HashSet<>();
 
+    //@JsonView({AccountView.AccountComplete.class})
     @JsonIgnore
     @ManyToMany(mappedBy = "accounts")
-    //@JsonView({AccountView.AccountComplete.class})
     private List<Activity> activities = new ArrayList<>();
 
     public Account() {

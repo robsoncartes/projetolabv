@@ -19,9 +19,9 @@ import javax.validation.constraints.NotNull;
 @Table(name = "answers")
 public class Answer {
 
+    @JsonView({AnswerView.AnswerSimple.class, ExamView.ExamComplete.class, QuestionView.QuestionComplete.class})
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView({AnswerView.AnswerSimple.class, ExamView.ExamComplete.class, QuestionView.QuestionComplete.class})
     private Integer id;
 
     @JsonView({AnswerView.AnswerSimple.class, ExamView.ExamComplete.class, QuestionView.QuestionComplete.class})
@@ -32,10 +32,10 @@ public class Answer {
     @NotNull
     private Boolean correct;
 
+    @JsonView({AnswerView.AnswerComplete.class, ExamView.ExamComplete.class})
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "question_id")
-    @JsonView({AnswerView.AnswerComplete.class, ExamView.ExamComplete.class})
     @NotNull
     private Question question;
 

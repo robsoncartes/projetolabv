@@ -18,36 +18,36 @@ import java.util.List;
 @ToString
 public class Question {
 
+    @JsonView({QuestionView.QuestionSimple.class, ExamView.ExamComplete.class})
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter
-    @JsonView({QuestionView.QuestionSimple.class, ExamView.ExamComplete.class})
     private Integer id;
 
+    @JsonView({QuestionView.QuestionSimple.class, ExamView.ExamComplete.class})
     @Getter
     @Setter
-    @JsonView({QuestionView.QuestionSimple.class, ExamView.ExamComplete.class})
     @NotNull
     private String question;
 
-    @Getter
     @JsonView(QuestionView.QuestionComplete.class)
+    @Getter
     private String assertion;
 
+    @JsonView({QuestionView.QuestionComplete.class, ExamView.ExamComplete.class})
     //@JsonIgnore
     @OneToMany(mappedBy = "question")
     @Getter
     @Setter
-    @JsonView({QuestionView.QuestionComplete.class, ExamView.ExamComplete.class})
     private List<Answer> answers = new LinkedList<>();
 
+    @JsonView({QuestionView.QuestionComplete.class, ExamView.ExamComplete.class})
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "exam_id")
     @Getter
     @Setter
-    @JsonView({QuestionView.QuestionComplete.class, ExamView.ExamComplete.class})
     @NotNull
     private Exam exam;
 
