@@ -18,8 +18,8 @@ public class ChoiceController {
     @Autowired
     private ChoiceService choiceService;
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @JsonView(ChoiceView.ChoiceSimple.class)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Choice> findChoiceById(@PathVariable Integer id) {
 
         Choice choice = choiceService.findById(id);
@@ -27,8 +27,8 @@ public class ChoiceController {
         return ResponseEntity.ok().body(choice);
     }
 
-    @RequestMapping(method = RequestMethod.GET)
     @JsonView(ChoiceView.ChoiceComplete.class)
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Iterable<Choice>> findAllChoices() {
 
         Iterable<Choice> choices = choiceService.findChoices();

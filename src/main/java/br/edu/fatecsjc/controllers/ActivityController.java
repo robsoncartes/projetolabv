@@ -18,8 +18,8 @@ public class ActivityController {
     @Autowired
     private ActivityService activityService;
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @JsonView(ActivityView.ActivitySimple.class)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Activity> findActivityById(@PathVariable Integer id) {
 
         Activity activity = activityService.findById(id);
@@ -27,8 +27,8 @@ public class ActivityController {
         return ResponseEntity.ok().body(activity);
     }
 
-    @RequestMapping(method = RequestMethod.GET)
     @JsonView(ActivityView.ActivitySimple.class)
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Iterable<Activity>> findAllActivities() {
 
         Iterable<Activity> activities = activityService.findActivities();

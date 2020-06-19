@@ -1,7 +1,9 @@
 package br.edu.fatecsjc.controllers;
 
 import br.edu.fatecsjc.models.Administrator;
+import br.edu.fatecsjc.models.views.AccountView;
 import br.edu.fatecsjc.services.AdministratorService;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,7 @@ public class AdministratorController {
     @Autowired
     private AdministratorService administratorService;
 
+    @JsonView(AccountView.AccountLogin.class)
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Administrator> findAdministratorById(@PathVariable Long id) {
 
@@ -26,6 +29,7 @@ public class AdministratorController {
 
     }
 
+    @JsonView(AccountView.AccountComplete.class)
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Iterable<Administrator>> findAllAdministrators() {
 

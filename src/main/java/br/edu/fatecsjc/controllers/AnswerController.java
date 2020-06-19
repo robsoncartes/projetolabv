@@ -18,8 +18,8 @@ public class AnswerController {
     @Autowired
     private AnswerService answerService;
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @JsonView(AnswerView.AnswerSimple.class)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Answer> findAnswerById(@PathVariable Integer id) {
 
         Answer answer = answerService.findById(id);
@@ -27,8 +27,8 @@ public class AnswerController {
         return ResponseEntity.ok().body(answer);
     }
 
-    @RequestMapping(method = RequestMethod.GET)
     @JsonView(AnswerView.AnswerComplete.class)
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Iterable<Answer>> findAllAnswers() {
 
         Iterable<Answer> answers = answerService.findAnswers();

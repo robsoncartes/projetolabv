@@ -22,8 +22,8 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @JsonView(AccountView.AccountComplete.class)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Account> findAccountById(@PathVariable Long id) {
 
         Account account = accountService.findById(id);
@@ -31,8 +31,8 @@ public class AccountController {
         return ResponseEntity.ok().body(account);
     }
 
-    @RequestMapping(value = "/email", method = RequestMethod.GET)
     @JsonView(AccountView.AccountComplete.class)
+    @RequestMapping(value = "/email", method = RequestMethod.GET)
     public ResponseEntity<Account> findAccountByEmail(@RequestParam(value = "value") String email) {
 
         Account account = accountService.findByEmail(email);
@@ -40,8 +40,8 @@ public class AccountController {
         return ResponseEntity.ok().body(account);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
     @JsonView(AccountView.AccountComplete.class)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> insertAccount(@Valid @RequestBody Account account) {
 
         Account obj = accountService.saveAccount(account);
@@ -68,8 +68,8 @@ public class AccountController {
         return ResponseEntity.noContent().build();
     }
 
-    @RequestMapping(method = RequestMethod.GET)
     @JsonView(AccountView.AccountLogin.class)
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Iterable<Account>> findAllAccounts() {
 
         Iterable<Account> accounts = accountService.findAccounts();
