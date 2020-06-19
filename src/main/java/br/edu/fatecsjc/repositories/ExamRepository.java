@@ -4,6 +4,7 @@ import br.edu.fatecsjc.models.Exam;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -18,5 +19,5 @@ public interface ExamRepository extends CrudRepository<Exam, Integer> {
     <S extends Exam> S save(S entity);
 
     @Override
-    Iterable<Exam> findAll();
+    List<Exam> findAll();
 }

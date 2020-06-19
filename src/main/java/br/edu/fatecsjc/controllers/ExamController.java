@@ -12,6 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 @RestController("ExamController")
 @RequestMapping(value = "/exams")
@@ -31,9 +32,9 @@ public class ExamController {
 
     @JsonView(ExamView.ExamComplete.class)
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Iterable<Exam>> findAllExams() {
+    public ResponseEntity<List<Exam>> findAllExams() {
 
-        Iterable<Exam> exams = examService.findExams();
+        List<Exam> exams = examService.findExams();
 
         return ResponseEntity.ok().body(exams);
     }
