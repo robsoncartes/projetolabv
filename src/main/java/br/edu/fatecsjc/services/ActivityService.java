@@ -7,6 +7,8 @@ import br.edu.fatecsjc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ActivityService {
 
@@ -42,7 +44,7 @@ public class ActivityService {
         throw new DataIntegrityException("O usuário já salvou uma atividade com este título.");
     }
 
-    public Iterable<Activity> findActivities() {
+    public List<Activity> findActivities() {
 
         return activityRepository.findAll();
     }

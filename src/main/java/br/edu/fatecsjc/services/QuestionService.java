@@ -6,6 +6,8 @@ import br.edu.fatecsjc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class QuestionService {
 
@@ -26,7 +28,7 @@ public class QuestionService {
         questionRepository.save(question);
     }
 
-    public Iterable<Question> findQuestions() {
+    public List<Question> findQuestions() {
 
         return questionRepository.findAll();
     }

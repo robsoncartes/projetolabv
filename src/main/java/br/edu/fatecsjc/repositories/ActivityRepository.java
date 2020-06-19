@@ -19,5 +19,5 @@ public interface ActivityRepository extends CrudRepository<Activity, Integer> {
     List<Activity> save(List<Activity> activities);
 
     @Override
-    Iterable<Activity> findAll();
+    List<Activity> findAll();
 }

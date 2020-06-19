@@ -6,6 +6,8 @@ import br.edu.fatecsjc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ChoiceService {
 
@@ -26,7 +28,7 @@ public class ChoiceService {
         choiceRepository.save(choice);
     }
 
-    public Iterable<Choice> findChoices() {
+    public List<Choice> findChoices() {
 
         return choiceRepository.findAll();
     }

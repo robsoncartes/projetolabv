@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.HandlerMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -108,7 +109,7 @@ public class AccountService {
         }
     }
 
-    public Iterable<Account> findAccounts() {
+    public List<Account> findAccounts() {
 
         return accountRepository.findAll();
     }

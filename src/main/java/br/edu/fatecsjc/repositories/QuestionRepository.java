@@ -4,6 +4,7 @@ import br.edu.fatecsjc.models.Question;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -16,5 +17,5 @@ public interface QuestionRepository extends CrudRepository<Question, Integer> {
     <S extends Question> S save(S entity);
 
     @Override
-    Iterable<Question> findAll();
+    List<Question> findAll();
 }

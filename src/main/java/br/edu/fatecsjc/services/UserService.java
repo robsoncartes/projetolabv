@@ -6,6 +6,8 @@ import br.edu.fatecsjc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -27,7 +29,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public Iterable<User> findUsers() {
+    public List<User> findUsers() {
 
         return userRepository.findAll();
     }

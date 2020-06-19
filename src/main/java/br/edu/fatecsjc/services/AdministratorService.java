@@ -6,6 +6,8 @@ import br.edu.fatecsjc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AdministratorService {
 
@@ -27,7 +29,7 @@ public class AdministratorService {
         return administratorRepository.save(administrator);
     }
 
-    public Iterable<Administrator> findAdministrators() {
+    public List<Administrator> findAdministrators() {
 
         return administratorRepository.findAll();
     }
