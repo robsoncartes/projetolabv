@@ -17,7 +17,7 @@ public class AdministratorService {
         Administrator administrator = administratorRepository.findById(id).orElse(null);
 
         if (administrator == null)
-            throw new ObjectNotFoundException("Administrator not found. Id: " + id + ", Type: " + Administrator.class.getName());
+            throw new ObjectNotFoundException("Administrador não encontrado. Id: " + id + ", Tipo: " + Administrator.class.getName());
 
         return administrator;
     }

@@ -17,7 +17,7 @@ public class UserService {
         User user = userRepository.findById(id).orElse(null);
 
         if (user == null)
-            throw new ObjectNotFoundException("User not found. Id: " + id + ", Type: " + User.class.getName());
+            throw new ObjectNotFoundException("Usuário não encontrado. Id: " + id + ", Tipo: " + User.class.getName());
 
         return user;
     }

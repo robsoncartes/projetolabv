@@ -18,7 +18,7 @@ public class ActivityService {
         Activity activity = activityRepository.findById(id).orElse(null);
 
         if (activity == null)
-            throw new ObjectNotFoundException("Activity not found. Id: " + id + ", Type: " + Activity.class.getName());
+            throw new ObjectNotFoundException("Atividade não encontrada. Id: " + id + ", Tipo: " + Activity.class.getName());
 
         return activity;
     }
@@ -39,7 +39,7 @@ public class ActivityService {
 
         if (isValid)
             return activityRepository.save(activity);
-        throw new DataIntegrityException("User already saved an Activitie with this title");
+        throw new DataIntegrityException("O usuário já salvou uma atividade com este título.");
     }
 
     public Iterable<Activity> findActivities() {

@@ -17,7 +17,7 @@ public class QuestionService {
         Question question = questionRepository.findById(id).orElse(null);
 
         if (question == null)
-            throw new ObjectNotFoundException("Question not found. Id: " + id + ", Type: " + Question.class.getName());
+            throw new ObjectNotFoundException("Questão não encontrada. Id: " + id + ", Tipo: " + Question.class.getName());
 
         return question;
     }

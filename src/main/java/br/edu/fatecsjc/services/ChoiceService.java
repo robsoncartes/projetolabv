@@ -17,7 +17,7 @@ public class ChoiceService {
         Choice choice = choiceRepository.findById(id).orElse(null);
 
         if (choice == null)
-            throw new ObjectNotFoundException("Choice not found. Id: " + id + ", Type: " + Choice.class.getName());
+            throw new ObjectNotFoundException("Escolha não encontrada. Id: " + id + ", Tipo: " + Choice.class.getName());
 
         return choice;
     }

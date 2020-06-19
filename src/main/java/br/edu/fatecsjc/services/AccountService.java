@@ -40,12 +40,12 @@ public class AccountService {
         JWTAccount jwtAccount = jwtAccountService.getAccountAuthenticated();
 
         if (jwtAccount == null || !jwtAccount.hasHole(AuthorityName.ADMINISTRATOR) && !id.equals(jwtAccount.getId()))
-            throw new AuthorizationException("Access denied.");
+            throw new AuthorizationException("Accesso negado.");
 
         Account account = accountRepository.findById(id).orElse(null);
 
         if (account == null)
-            throw new ObjectNotFoundException("Account not found. Id: " + id + ", Type: " + Account.class.getName());
+            throw new ObjectNotFoundException("Conta não encontrada. Id: " + id + ", Tipo: " + Account.class.getName());
 
         return account;
     }
@@ -55,12 +55,12 @@ public class AccountService {
         JWTAccount jwtAccount = jwtAccountService.getAccountAuthenticated();
 
         if (jwtAccount == null || !jwtAccount.hasHole(AuthorityName.ADMINISTRATOR) && !email.equals(jwtAccount.getUsername()))
-            throw new AuthorizationException("Access denied.");
+            throw new AuthorizationException("Accesso negado.");
 
         Account account = accountRepository.findByEmail(email);
 
         if (account == null)
-            throw new ObjectNotFoundException("Account not found. Email: " + email + ", Type: " + Account.class.getName());
+            throw new ObjectNotFoundException("Conta não encontrada. Email: " + email + ", Tipo: " + Account.class.getName());
 
         return account;
     }
@@ -75,7 +75,7 @@ public class AccountService {
             account.setPassword(passwordEncoder.encode(account.getPassword()));
             return accountRepository.save(account);
         } else
-            throw new DataIntegrityException("Email already exist");
+            throw new DataIntegrityException("Email já existe.");
     }
 
     public Account updateAccount(Account account) {
@@ -104,7 +104,7 @@ public class AccountService {
         try {
             accountRepository.deleteById(id);
         } catch (DataIntegrityViolationException e) {
-            throw new DataIntegrityException("It is not possible to delete the informed account because there are related entities");
+            throw new DataIntegrityException("Não é possível excluir a conta informada porque existem entidades relacionadas.");
         }
     }
 

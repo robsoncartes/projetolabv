@@ -17,7 +17,7 @@ public class AnswerService {
         Answer answer = answerRepository.findById(id).orElse(null);
 
         if (answer == null)
-            throw new ObjectNotFoundException("Answer not found. Id: " + id + ", Type: " + Answer.class.getName());
+            throw new ObjectNotFoundException("Resposta não encontrada. Id: " + id + ", Tipo: " + Answer.class.getName());
 
         return answer;
     }

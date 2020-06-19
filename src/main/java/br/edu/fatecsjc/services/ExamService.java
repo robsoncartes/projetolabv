@@ -20,7 +20,7 @@ public class ExamService {
         Exam exam = examRepository.findById(id).orElse(null);
 
         if (exam == null)
-            throw new ObjectNotFoundException("Exam not found. Id: " + id + ", Type: " + Exam.class.getName());
+            throw new ObjectNotFoundException("Exame não encontrado. Id: " + id + ", Tipo: " + Exam.class.getName());
 
         return exam;
     }
@@ -39,7 +39,7 @@ public class ExamService {
 
             return examRepository.save(exam);
         } else
-            throw new DataIntegrityException("There is already an exam with this title.");
+            throw new DataIntegrityException("Já existe um exame com este título.");
     }
 
     public Iterable<Exam> findExams() {
