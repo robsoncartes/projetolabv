@@ -9,7 +9,7 @@ public class QuestionFactory {
 
         // Question q = new Question(1, "questi", new Exam());
         question.setId(1);
-        question.setQuestion("Question1");
+        question.setQuestionTitle("Question1");
         question.setExam(ExamFactory.validExam(new Exam()));
 
         return question;

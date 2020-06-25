@@ -71,7 +71,7 @@ public class QuestionTest extends TestUtil {
     public void questionShouldNotBeValidWithQuestionEqualsNull() {
 
         Question question = QuestionFactory.validQuestion(new Question());
-        question.setQuestion(null);
+        question.setQuestionTitle(null);
         assertEquals(1, getErrorSize(question));
         assertEquals("must not be null", getErrorMessage(question));
     }

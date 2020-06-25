@@ -29,7 +29,7 @@ public class Question {
     @Getter
     @Setter
     @NotNull
-    private String question;
+    private String questionTitle;
 
     @JsonView(QuestionView.QuestionComplete.class)
     @Getter
@@ -51,9 +51,9 @@ public class Question {
     @NotNull
     private Exam exam;
 
-    public Question(Integer id, String question, Exam exam) {
+    public Question(Integer id, String questionTitle, Exam exam) {
         this.id = id;
-        this.question = question;
+        this.questionTitle = questionTitle;
         this.exam = exam;
     }
 
@@ -76,7 +76,7 @@ public class Question {
     }
 
     public boolean isValid(String questionTitle) {
-        return this.getQuestion().equals(questionTitle);
+        return this.getQuestionTitle().equals(questionTitle);
     }
 
 

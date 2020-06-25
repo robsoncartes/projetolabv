@@ -53,9 +53,9 @@ public class DBService {
         Answer answer31 = new Answer(null, "ADD", false, question3);
         Answer answer32 = new Answer(null, "INSERT", true, question3);
 
-        Choice choice1 = new Choice(null, question1.getQuestion(), answer11.getAnswer(), true, activity1);
-        Choice choice2 = new Choice(null, question2.getQuestion(), answer21.getAnswer(), true, activity1);
-        Choice choice3 = new Choice(null, question3.getQuestion(), answer32.getAnswer(), true, activity2);
+        Choice choice1 = new Choice(null, question1.getQuestionTitle(), answer11.getAnswer(), true, activity1);
+        Choice choice2 = new Choice(null, question2.getQuestionTitle(), answer21.getAnswer(), true, activity1);
+        Choice choice3 = new Choice(null, question3.getQuestionTitle(), answer32.getAnswer(), true, activity2);
 
         account1.addAtivity(activity1);
         account1.addAtivity(activity2);
