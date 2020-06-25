@@ -11,6 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 @RestController("UserAcontroller")
 @RequestMapping(value = "/users")
@@ -30,9 +31,9 @@ public class UserController {
 
     @JsonView(AccountView.AccountComplete.class)
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Iterable<User>> findAllUsers() {
+    public ResponseEntity<List<User>> findAllUsers() {
 
-        Iterable<User> users = userService.findUsers();
+        List<User> users = userService.findUsers();
 
         return ResponseEntity.ok().body(users);
     }

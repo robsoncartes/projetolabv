@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController("ActivityController")
 @RequestMapping(value = "/activities")
@@ -30,9 +31,9 @@ public class ActivityController {
 
     @JsonView(ActivityView.ActivitySimple.class)
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Iterable<Activity>> findAllActivities() {
+    public ResponseEntity<List<Activity>> findAllActivities() {
 
-        Iterable<Activity> activities = activityService.findActivities();
+        List<Activity> activities = activityService.findActivities();
 
         return ResponseEntity.ok().body(activities);
     }

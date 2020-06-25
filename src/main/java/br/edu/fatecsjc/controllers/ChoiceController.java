@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController("ChoiceController")
 @RequestMapping(value = "/choices")
 public class ChoiceController {
@@ -29,9 +31,9 @@ public class ChoiceController {
 
     @JsonView(ChoiceView.ChoiceComplete.class)
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Iterable<Choice>> findAllChoices() {
+    public ResponseEntity<List<Choice>> findAllChoices() {
 
-        Iterable<Choice> choices = choiceService.findChoices();
+        List<Choice> choices = choiceService.findChoices();
 
         return ResponseEntity.ok().body(choices);
     }

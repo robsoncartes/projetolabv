@@ -13,6 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 @RestController("AccountController")
 @RequestMapping(value = "/accounts")
@@ -70,9 +71,9 @@ public class AccountController {
 
     @JsonView(AccountView.AccountLogin.class)
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Iterable<Account>> findAllAccounts() {
+    public ResponseEntity<List<Account>> findAllAccounts() {
 
-        Iterable<Account> accounts = accountService.findAccounts();
+        List<Account> accounts = accountService.findAccounts();
 
         return ResponseEntity.ok().body(accounts);
     }

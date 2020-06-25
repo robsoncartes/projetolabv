@@ -11,6 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 @RestController("AdministratorController")
 @RequestMapping(value = "/administrators")
@@ -31,9 +32,9 @@ public class AdministratorController {
 
     @JsonView(AccountView.AccountComplete.class)
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Iterable<Administrator>> findAllAdministrators() {
+    public ResponseEntity<List<Administrator>> findAllAdministrators() {
 
-        Iterable<Administrator> administrators = administratorService.findAdministrators();
+        List<Administrator> administrators = administratorService.findAdministrators();
 
         return ResponseEntity.ok().body(administrators);
     }

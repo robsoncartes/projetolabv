@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController("AnswerController")
 @RequestMapping(value = "/answers")
 public class AnswerController {
@@ -29,9 +31,9 @@ public class AnswerController {
 
     @JsonView(AnswerView.AnswerComplete.class)
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Iterable<Answer>> findAllAnswers() {
+    public ResponseEntity<List<Answer>> findAllAnswers() {
 
-        Iterable<Answer> answers = answerService.findAnswers();
+        List<Answer> answers = answerService.findAnswers();
 
         return ResponseEntity.ok().body(answers);
     }
