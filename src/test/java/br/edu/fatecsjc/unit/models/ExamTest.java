@@ -71,7 +71,7 @@ public class ExamTest extends TestUtil {
 
         Exam exam = ExamFactory.validExam(new Exam());
 
-        exam.setTitle(null);
+        exam.setExamTitle(null);
         assertEquals(1, getErrorSize(exam));
         assertEquals("must not be null", getErrorMessage(exam));
     }

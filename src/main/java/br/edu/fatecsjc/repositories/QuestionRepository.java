@@ -13,6 +13,8 @@ public interface QuestionRepository extends CrudRepository<Question, Integer> {
     @Override
     Optional<Question> findById(Integer integer);
 
+    Question findByQuestionTitle(String questionTitle);
+
     @Override
     <S extends Question> S save(S entity);
 

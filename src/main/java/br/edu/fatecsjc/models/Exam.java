@@ -22,7 +22,7 @@ public class Exam {
     @JsonView(ExamView.ExamSimple.class)
     @NotNull
     @Column(unique = true)
-    private String title;
+    private String examTitle;
 
     @JsonView(ExamView.ExamComplete.class)
     @NotNull
@@ -49,9 +49,9 @@ public class Exam {
     public Exam() {
     }
 
-    public Exam(Integer id, String title, String type, String description, String author) {
+    public Exam(Integer id, String examTitle, String type, String description, String author) {
         this.id = id;
-        this.title = title;
+        this.examTitle = examTitle;
         this.type = type;
         this.description = description;
         this.author = author;
@@ -75,6 +75,6 @@ public class Exam {
     }
 
     public boolean isValid(Exam exam) {
-        return this.getTitle().equals(exam.getTitle());
+        return this.getExamTitle().equals(exam.getExamTitle());
     }
 }

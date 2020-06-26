@@ -29,11 +29,11 @@ public class ExamService {
     @Transactional
     public Exam saveExam(Exam exam) {
 
-        Exam obj = examRepository.findByTitle(exam.getTitle());
+        Exam obj = examRepository.findByExamTitle(exam.getExamTitle());
 
         if (obj == null) {
             exam.setId(null);
-            exam.setTitle(exam.getTitle());
+            exam.setExamTitle(exam.getExamTitle());
             exam.setType(exam.getType());
             exam.setDescription(exam.getDescription());
             exam.setAuthor(exam.getAuthor());

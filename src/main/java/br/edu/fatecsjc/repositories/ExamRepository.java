@@ -13,7 +13,7 @@ public interface ExamRepository extends CrudRepository<Exam, Integer> {
     @Override
     Optional<Exam> findById(Integer integer);
 
-    Exam findByTitle(String title);
+    Exam findByExamTitle(String examTitle);
 
     @Override
     <S extends Exam> S save(S entity);

@@ -33,8 +33,10 @@ public class DBService {
     public void instantiateTestDatabase() throws Exception {
 
         Administrator account1 = new Administrator(null, "email1@gmail.com", "admin1", "pass");
-        User account2 = new User(null, "email2@gmail.com", "user1", "pass");
+        Administrator account2 = new Administrator(null, "email2@gmail.com", "admin2", "pass");
+        User account3 = new User(null, "email3@gmail.com", "user1", "pass");
         account1.addAuthorityName(AuthorityName.ADMINISTRATOR);
+        account2.addAuthorityName(AuthorityName.ADMINISTRATOR);
 
         Exam exam1 = new Exam(null, "Android Basic Quis", "Android Basic Test", "Online Android Test", account1.getUsername());
         Exam exam2 = new Exam(null, "Database Basic Quis", "Technology", "Database questions to improve your knowledge", account1.getUsername());
@@ -43,8 +45,8 @@ public class DBService {
         Question question2 = new Question(null, "Which among the following is not a member of Open Handset Alliance. Select one: ", exam1);
         Question question3 = new Question(null, "You can add a row using SQL in a database with which of the following?", exam2);
 
-        Activity activity1 = new Activity(null, account1.getUsername(), exam1.getTitle());
-        Activity activity2 = new Activity(null, account2.getUsername(), exam2.getTitle());
+        Activity activity1 = new Activity(null, account2.getUsername(), exam1.getExamTitle());
+        Activity activity2 = new Activity(null, account3.getUsername(), exam2.getExamTitle());
 
         Answer answer11 = new Answer(null, "True", true, question1);
         Answer answer12 = new Answer(null, "False", false, question1);
@@ -82,18 +84,30 @@ public class DBService {
         exam2.setActivity(activity2);
 
         List<Exam> exams = new ArrayList<>(Arrays.asList(exam1, exam2));
-        List<Question> questions = new ArrayList<>(Arrays.asList(question1, question2, question3));
-        List<Answer> answers = new ArrayList<>(Arrays.asList(answer11, answer12, answer21, answer22, answer31, answer32));
+        // List<Question> questions = new ArrayList<>(Arrays.asList(question1, question2, question3));
+        // List<Answer> answers = new ArrayList<>(Arrays.asList(answer11, answer12, answer21, answer22, answer31, answer32));
         List<Choice> choices = new ArrayList<>(Arrays.asList(choice1, choice2, choice3));
         List<Activity> activities = new ArrayList<>(Arrays.asList(activity1, activity2));
-        List<Account> accounts = new ArrayList<>(Arrays.asList(account1, account2));
+        List<Account> accounts = new ArrayList<>(Arrays.asList(account1, account2, account3));
 
 
         for (Account account : accounts) accountService.saveAccount(account);
         for (Activity activity : activities) activityService.saveActivity(activity);
         for (Exam exam : exams) examService.saveExam(exam);
-        for (Question question : questions) questionService.saveQuestion(question);
-        for (Answer answer : answers) answerService.saveAnswer(answer);
+        // for (Question question : questions) questionService.saveQuestion(question);
+
+        questionService.saveQuestion(question1, exam1);
+        questionService.saveQuestion(question2, exam1);
+        questionService.saveQuestion(question1, exam2);
+
+        // for (Answer answer : answers) answerService.saveAnswer(answer, question1);
+        answerService.saveAnswer(answer11, question1);
+        answerService.saveAnswer(answer12, question1);
+        answerService.saveAnswer(answer21, question2);
+        answerService.saveAnswer(answer22, question2);
+        answerService.saveAnswer(answer31, question3);
+        answerService.saveAnswer(answer32, question3);
+
         for (Choice choice : choices) choiceService.saveChoice(choice);
     }
 }

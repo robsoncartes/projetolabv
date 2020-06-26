@@ -8,7 +8,7 @@ public class ExamFactory {
 
         // Exam lol = new Exam(1, "teste", "teste", "s", "teste");
         exam.setId(1);
-        exam.setTitle("ExameTitle1");
+        exam.setExamTitle("ExameTitle1");
         exam.setType("Type1");
         exam.setDescription("Description1");
         exam.setAuthor("Author1");
