@@ -47,11 +47,6 @@ public class Account {
     @CollectionTable(name = "authority_names")
     private Set<Integer> authorities = new HashSet<>();
 
-    //@JsonView({AccountView.AccountComplete.class})
-    @JsonIgnore
-    @ManyToMany(mappedBy = "accounts")
-    private List<Activity> activities = new ArrayList<>();
-
     public Account() {
         addAuthorityName(AuthorityName.USER);
     }
@@ -71,9 +66,5 @@ public class Account {
     @JsonView(AccountView.AccountComplete.class)
     public Set<AuthorityName> getAuthorityNames() {
         return authorities.stream().map(AuthorityName::toEnum).collect(Collectors.toSet());
-    }
-
-    public void addAtivity(Activity activity) {
-        getActivities().add(activity);
     }
 }

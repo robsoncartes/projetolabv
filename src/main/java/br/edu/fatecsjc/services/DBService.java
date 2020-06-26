@@ -35,6 +35,8 @@ public class DBService {
         Administrator account1 = new Administrator(null, "email1@gmail.com", "admin1", "pass");
         Administrator account2 = new Administrator(null, "email2@gmail.com", "admin2", "pass");
         User account3 = new User(null, "email3@gmail.com", "user1", "pass");
+        User account4 = new User(null, "email4@gmail.com", "user2", "pass");
+
         account1.addAuthorityName(AuthorityName.ADMINISTRATOR);
         account2.addAuthorityName(AuthorityName.ADMINISTRATOR);
 
@@ -45,8 +47,8 @@ public class DBService {
         Question question2 = new Question(null, "Which among the following is not a member of Open Handset Alliance. Select one: ", exam1);
         Question question3 = new Question(null, "You can add a row using SQL in a database with which of the following?", exam2);
 
-        Activity activity1 = new Activity(null, account2.getUsername(), exam1.getExamTitle());
-        Activity activity2 = new Activity(null, account3.getUsername(), exam2.getExamTitle());
+        Activity activity1 = new Activity(null, account3.getUsername(), exam1.getExamTitle());
+        Activity activity2 = new Activity(null, account4.getUsername(), exam2.getExamTitle());
 
         Answer answer11 = new Answer(null, "True", true, question1);
         Answer answer12 = new Answer(null, "False", false, question1);
@@ -59,8 +61,8 @@ public class DBService {
         Choice choice2 = new Choice(null, question2.getQuestionTitle(), answer21.getAnswer(), true, activity1);
         Choice choice3 = new Choice(null, question3.getQuestionTitle(), answer32.getAnswer(), true, activity2);
 
-        account1.addAtivity(activity1);
-        account1.addAtivity(activity2);
+        account3.addAtivity(activity1);
+        account4.addAtivity(activity2);
 
         activity1.addAccount(account1);
         activity2.addAccount(account2);
@@ -88,7 +90,7 @@ public class DBService {
         // List<Answer> answers = new ArrayList<>(Arrays.asList(answer11, answer12, answer21, answer22, answer31, answer32));
         List<Choice> choices = new ArrayList<>(Arrays.asList(choice1, choice2, choice3));
         List<Activity> activities = new ArrayList<>(Arrays.asList(activity1, activity2));
-        List<Account> accounts = new ArrayList<>(Arrays.asList(account1, account2, account3));
+        List<Account> accounts = new ArrayList<>(Arrays.asList(account1, account2, account3, account4));
 
 
         for (Account account : accounts) accountService.saveAccount(account);
