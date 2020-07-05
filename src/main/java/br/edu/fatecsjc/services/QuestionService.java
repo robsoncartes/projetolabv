@@ -31,6 +31,16 @@ public class QuestionService {
         return question;
     }
 
+    public Question findByTitle(String questionTitle) {
+
+        Question question = questionRepository.findByQuestionTitle(questionTitle);
+
+        if (question == null)
+            throw new ObjectNotFoundException("Questão não encontrada. Título: " + questionTitle + "Tipo: " + Question.class.getName());
+
+        return question;
+    }
+
     public boolean isQuestionAvailable(String questionTitle, String examTitle) {
 
         for (Question question : findQuestions()) {
@@ -42,16 +52,43 @@ public class QuestionService {
     }
 
     @Transactional
-    public Question saveQuestion(Question question, Exam exam) {
+    public Question saveQuestion(Question question) {
 
-        boolean isValid = isQuestionAvailable(question.getQuestionTitle(), exam.getExamTitle());
+        Exam eObj = examRepository.findByExamTitle(question.getExam().getExamTitle());
+
+        boolean isValid = isQuestionAvailable(question.getQuestionTitle(), question.getExam().getExamTitle());
 
         if (isValid) {
-            examRepository.save(exam);
+            if (eObj == null) {
+                Exam exam = new Exam();
+                exam.setId(null);
+                exam.setExamTitle(question.getExam().getExamTitle());
+                exam.setType(question.getExam().getType());
+                exam.setDescription(question.getExam().getDescription());
+                exam.setAuthor(question.getExam().getAuthor());
+
+                question.setId(null);
+                question.setQuestionTitle(question.getQuestionTitle());
+                question.setExam(exam);
+
+                exam.addQuestion(question);
+                examRepository.save(exam);
+
+            } else {
+                question.setId(null);
+                question.setQuestionTitle(question.getQuestionTitle());
+                question.getExam().setId(eObj.getId());
+                question.getExam().setExamTitle(question.getExam().getExamTitle());
+                question.getExam().setType(question.getExam().getType());
+                question.getExam().setDescription(question.getExam().getDescription());
+                question.getExam().setAuthor(question.getExam().getAuthor());
+            }
+
+
             return questionRepository.save(question);
         }
 
-        throw new DataIntegrityException("Já existe uma questão com esse título.");
+        throw new DataIntegrityException("Já existe um Exame com uma questão com esse título.");
     }
 
     public List<Question> findQuestions() {

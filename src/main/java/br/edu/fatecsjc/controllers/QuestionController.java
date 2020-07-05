@@ -1,6 +1,5 @@
 package br.edu.fatecsjc.controllers;
 
-import br.edu.fatecsjc.models.Exam;
 import br.edu.fatecsjc.models.Question;
 import br.edu.fatecsjc.models.views.QuestionView;
 import br.edu.fatecsjc.services.QuestionService;
@@ -39,10 +38,11 @@ public class QuestionController {
         return ResponseEntity.ok().body(questions);
     }
 
+    @JsonView(QuestionView.QuestionSave.class)
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> insertQuestion(@Valid @RequestBody Question question, Exam exam) {
+    public ResponseEntity<Void> insertQuestion(@Valid @RequestBody Question question) {
 
-        Question obj = questionService.saveQuestion(question, exam);
+        Question obj = questionService.saveQuestion(question);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 

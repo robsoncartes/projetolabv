@@ -39,6 +39,7 @@ public class ExamController {
         return ResponseEntity.ok().body(exams);
     }
 
+    @JsonView(ExamView.ExamSave.class)
     @PreAuthorize("hasRole('ADMINISTRATOR')")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> insertExam(@Valid @RequestBody Exam exam) {

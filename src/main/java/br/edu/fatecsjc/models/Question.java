@@ -18,24 +18,24 @@ import java.util.List;
 @ToString
 public class Question {
 
-    @JsonView({QuestionView.QuestionSimple.class, ExamView.ExamComplete.class})
+    @JsonView({QuestionView.QuestionSimple.class, ExamView.ExamSave.class, ExamView.ExamComplete.class})
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter
     private Integer id;
 
-    @JsonView({QuestionView.QuestionSimple.class, ExamView.ExamComplete.class})
+    @JsonView({QuestionView.QuestionSimple.class, ExamView.ExamSave.class, ExamView.ExamComplete.class})
     @Getter
     @Setter
     @NotNull
     private String questionTitle;
 
-    @JsonView(QuestionView.QuestionComplete.class)
+    @JsonView({QuestionView.QuestionSave.class, QuestionView.QuestionComplete.class, ExamView.ExamSave.class, ExamView.ExamComplete.class})
     @Getter
     private String assertion;
 
-    @JsonView({QuestionView.QuestionComplete.class, ExamView.ExamComplete.class})
+    @JsonView({QuestionView.QuestionComplete.class, QuestionView.QuestionSave.class, ExamView.ExamSave.class, ExamView.ExamComplete.class})
     //@JsonIgnore
     @OneToMany(mappedBy = "question")
     @Getter

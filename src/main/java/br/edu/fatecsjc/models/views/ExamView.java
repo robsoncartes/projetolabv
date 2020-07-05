@@ -6,7 +6,11 @@ public class ExamView {
 
     }
 
-    public static class ExamComplete extends ExamSimple {
+    public static class ExamSave extends ExamSimple {
+
+    }
+
+    public static class ExamComplete extends ExamSave {
 
     }
 }

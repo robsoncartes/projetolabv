@@ -6,6 +6,11 @@ public class QuestionView {
 
     }
 
-    public static class QuestionComplete extends QuestionSimple {
+    public static class QuestionSave extends QuestionSimple{
+
+    }
+
+    public static class QuestionComplete extends QuestionSave {
+
     }
 }

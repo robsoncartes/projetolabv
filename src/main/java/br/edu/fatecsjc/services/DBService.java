@@ -40,12 +40,12 @@ public class DBService {
         account1.addAuthorityName(AuthorityName.ADMINISTRATOR);
         account2.addAuthorityName(AuthorityName.ADMINISTRATOR);
 
-        Exam exam1 = new Exam(null, "Android Basic Quis", "Android Basic Test", "Online Android Test", account1.getUsername());
-        Exam exam2 = new Exam(null, "Database Basic Quis", "Technology", "Database questions to improve your knowledge", account1.getUsername());
+        Exam exam1 = new Exam(null, "Exame A", "Tipo A", "Descrição A", account1.getUsername());
+        Exam exam2 = new Exam(null, "Exame B", "Tipo B", "Descrição B", account1.getUsername());
 
-        Question question1 = new Question(null, "Every Android application must have the file AndroidManifest.xml file in its root directory. Select one:", exam1);
-        Question question2 = new Question(null, "Which among the following is not a member of Open Handset Alliance. Select one: ", exam1);
-        Question question3 = new Question(null, "You can add a row using SQL in a database with which of the following?", exam2);
+        Question question1 = new Question(null, "Pergunta 1", exam1);
+        Question question2 = new Question(null, "Pergunta 2", exam1);
+        Question question3 = new Question(null, "Pergunta 3", exam2);
 
         Activity activity1 = new Activity(null, account3.getUsername(), exam1.getExamTitle());
         Activity activity2 = new Activity(null, account4.getUsername(), exam2.getExamTitle());
@@ -74,9 +74,9 @@ public class DBService {
         question3.addAnswer(answer31);
         question3.addAnswer(answer32);
 
-        question1.setAssertion("True");
-        question2.setAssertion("Apple");
-        question3.setAssertion("INSERT");
+        // question1.setAssertion("True");
+        // question2.setAssertion("Apple");
+        // question3.setAssertion("INSERT");
 
         exam1.addQuestion(question1);
         exam1.addQuestion(question2);
@@ -98,9 +98,9 @@ public class DBService {
         for (Exam exam : exams) examService.saveExam(exam);
         // for (Question question : questions) questionService.saveQuestion(question);
 
-        questionService.saveQuestion(question1, exam1);
-        questionService.saveQuestion(question2, exam1);
-        questionService.saveQuestion(question1, exam2);
+        questionService.saveQuestion(question1);
+        questionService.saveQuestion(question2);
+        questionService.saveQuestion(question3);
 
         // for (Answer answer : answers) answerService.saveAnswer(answer, question1);
         answerService.saveAnswer(answer11, question1);

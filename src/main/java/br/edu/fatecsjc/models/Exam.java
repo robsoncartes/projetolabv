@@ -1,6 +1,7 @@
 package br.edu.fatecsjc.models;
 
 import br.edu.fatecsjc.models.views.ExamView;
+import br.edu.fatecsjc.models.views.QuestionView;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 
@@ -14,29 +15,29 @@ import java.util.List;
 @Table(name = "exams")
 public class Exam {
 
-    @JsonView(ExamView.ExamSimple.class)
+    @JsonView({ExamView.ExamSimple.class})
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JsonView(ExamView.ExamSimple.class)
+    @JsonView({ExamView.ExamSimple.class})
     @NotNull
     @Column(unique = true)
     private String examTitle;
 
-    @JsonView(ExamView.ExamComplete.class)
+    @JsonView({ExamView.ExamSave.class, QuestionView.QuestionSave.class})
     @NotNull
     private String type;
 
-    @JsonView(ExamView.ExamComplete.class)
+    @JsonView({ExamView.ExamSave.class, QuestionView.QuestionSave.class})
     @NotNull
     private String description;
 
-    @JsonView(ExamView.ExamComplete.class)
+    @JsonView({ExamView.ExamSave.class, QuestionView.QuestionSave.class})
     @NotNull
     private String author;
 
-    @JsonView(ExamView.ExamComplete.class)
+    @JsonView({ExamView.ExamSave.class, QuestionView.QuestionSave.class})
     // @JsonIgnore
     @OneToMany(mappedBy = "exam")
     private List<Question> questions = new LinkedList<>();
