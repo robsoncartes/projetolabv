@@ -78,7 +78,7 @@ public class AccountController {
         return ResponseEntity.ok().body(accounts);
     }
 
-    @PreAuthorize("hasAnyRole('ADMINISTRATOR')")
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     @RequestMapping(value = "/page", method = RequestMethod.GET)
     public ResponseEntity<Page<Account>> findPage(
             @RequestParam(value = "page", defaultValue = "0") Integer page,

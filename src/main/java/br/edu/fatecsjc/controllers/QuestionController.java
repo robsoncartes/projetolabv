@@ -20,7 +20,7 @@ public class QuestionController {
     @Autowired
     private QuestionService questionService;
 
-    @JsonView(QuestionView.QuestionSimple.class)
+    @JsonView(QuestionView.QuestionComplete.class)
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Question> findQuestionById(@PathVariable Integer id) {
 
@@ -29,7 +29,7 @@ public class QuestionController {
         return ResponseEntity.ok().body(question);
     }
 
-    @JsonView(QuestionView.QuestionComplete.class)
+    @JsonView(QuestionView.QuestionSimple.class)
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<Question>> findQuestions() {
 

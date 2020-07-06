@@ -46,14 +46,15 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     };
 
     public static final String[] PUBLIC_MATCHERS_GET = {
+
+    };
+
+    public static final String[] PUBLIC_MATCHERS_POST = {
             "/activities/**",
             "/exams/**",
             "/questions/**",
             "/choices/**",
-            "/answers/**"
-    };
-
-    public static final String[] PUBLIC_MATCHERS_POST = {
+            "/answers/**",
             "/accounts/**",
             "/login/**"
     };

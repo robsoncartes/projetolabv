@@ -21,7 +21,7 @@ public class ExamController {
     @Autowired
     private ExamService examService;
 
-    @JsonView(ExamView.ExamSimple.class)
+    @JsonView(ExamView.ExamComplete.class)
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Exam> findExamById(@PathVariable Integer id) {
 
@@ -30,7 +30,7 @@ public class ExamController {
         return ResponseEntity.ok().body(exam);
     }
 
-    @JsonView(ExamView.ExamComplete.class)
+    @JsonView(ExamView.ExamSimple.class)
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<Exam>> findAllExams() {
 
