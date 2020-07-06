@@ -57,6 +57,7 @@ public class Question {
         this.exam = exam;
     }
 
+    /*
     public void setAssertion(String assertion) {
 
         for (Answer answer : getAnswers()) {
@@ -65,6 +66,10 @@ public class Question {
                 break;
             }
         }
+    }*/
+
+    public void setAssertion(String assertion){
+        this.assertion = assertion;
     }
 
     public void addAnswer(Answer answer) {

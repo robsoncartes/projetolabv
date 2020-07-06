@@ -74,9 +74,9 @@ public class DBService {
         question3.addAnswer(answer31);
         question3.addAnswer(answer32);
 
-        // question1.setAssertion("True");
-        // question2.setAssertion("Apple");
-        // question3.setAssertion("INSERT");
+        question1.setAssertion("True");
+        question2.setAssertion("Apple");
+        question3.setAssertion("INSERT");
 
         exam1.addQuestion(question1);
         exam1.addQuestion(question2);
