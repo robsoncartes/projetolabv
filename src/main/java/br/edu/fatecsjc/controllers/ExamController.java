@@ -30,7 +30,7 @@ public class ExamController {
         return ResponseEntity.ok().body(exam);
     }
 
-    @JsonView(ExamView.ExamSimple.class)
+    @JsonView(ExamView.ExamComplete.class)
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<Exam>> findAllExams() {
 
