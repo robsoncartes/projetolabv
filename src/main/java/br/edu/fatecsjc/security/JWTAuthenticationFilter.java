@@ -26,7 +26,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private JWTUtil jwtUtil;
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil) {
-        // method setAuth.. UsernamePasswordAuthenticationFilter extends AbstractAuthenticationProcessingFilter
+        // method setAuth.. UsernamePasswordAuthenticationFilter extends
+        // AbstractAuthenticationProcessingFilter
         setAuthenticationFailureHandler(new JWTAuthenticationFailureHandler()); //
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
@@ -34,11 +35,13 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+            throws AuthenticationException {
 
         try {
             Account account = new ObjectMapper().readValue(request.getInputStream(), Account.class);
-            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(account.getEmail(), account.getPassword(), new ArrayList<>());
+            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(account.getEmail(),
+                    account.getPassword(), new ArrayList<>());
 
             return authenticationManager.authenticate(authToken);
         } catch (IOException e) {
@@ -47,7 +50,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) {
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
+            Authentication authResult) {
         // super.successfulAuthentication(request, response, chain, authResult);
 
         String email = ((JWTAccount) authResult.getPrincipal()).getUsername();
@@ -66,27 +70,18 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         /**
          * Called when an authentication attempt fails.
          *
-         * @param request   the request during which the authentication attempt occurred.
+         * @param request   the request during which the authentication attempt
+         *                  occurred.
          * @param response  the response.
          * @param exception the exception which was thrown to reject the authentication
          */
         @Override
-        public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {
+        public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
+                AuthenticationException exception) throws IOException {
 
             response.setStatus(401);
             response.setContentType("application/json");
-            response.getWriter().append(json());
-        }
-
-        private String json() {
-
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-
-            return "{\"timestamp\": " + sdf.format(new Date().getTime()) + ", "
-                    + "\"status\": 401, "
-                    + "\"error\": \"Not authorized.\", "
-                    + "\"message\": \"Authentication failed: Invalid email or password.\", "
-                    + "\"path\": \"/login\"}";
+            response.getWriter().append("Não foi possível efetuar o login, confirme seu usuário e senha!");
         }
     }
 }
