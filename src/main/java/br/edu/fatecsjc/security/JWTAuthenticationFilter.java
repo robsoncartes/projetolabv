@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -46,14 +47,16 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
-                                            Authentication authResult) {
+            Authentication authResult) {
         // super.successfulAuthentication(request, response, chain, authResult);
 
         String email = ((JWTAccount) authResult.getPrincipal()).getUsername();
+        Collection auths = ((JWTAccount) authResult.getPrincipal()).getAuthorities();
         String token = jwtUtil.generateToken(email);
         response.addHeader("Authorization", "Bearer " + token);
-        response.addHeader("access-control-expose-headers", "Authorization");
+        response.addHeader("Auths", String.valueOf(auths));
         response.addHeader("Username", email);
+        response.addHeader("access-control-expose-headers", "Authorization, Auths, Username");
 
         // Collection<String> headerNames = response.getHeaderNames();
         // System.err.println("HeadersNames: " + headerNames.toString());
@@ -72,7 +75,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
          */
         @Override
         public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
-                                            AuthenticationException exception) throws IOException {
+                AuthenticationException exception) throws IOException {
 
             response.setStatus(401);
             response.setContentType("application/json");
