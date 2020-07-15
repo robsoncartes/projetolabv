@@ -34,8 +34,28 @@ public class DBService {
 
         Administrator account1 = new Administrator(null, "email1@gmail.com", "admin1", "pass");
         Administrator account2 = new Administrator(null, "email2@gmail.com", "admin2", "pass");
-        User account3 = new User(null, "email3@gmail.com", "user1", "pass");
-        User account4 = new User(null, "email4@gmail.com", "user2", "pass");
+        User account3 = new User(null, "email3@gmail.com", "user3", "pass");
+        User account4 = new User(null, "email4@gmail.com", "user4", "pass");
+        User account5 = new User(null, "email5@gmail.com", "user5", "pass");
+        User account6 = new User(null, "email6@gmail.com", "user6", "pass");
+        User account7 = new User(null, "email7@gmail.com", "user7", "pass");
+        User account8 = new User(null, "email8@gmail.com", "user8", "pass");
+        User account9 = new User(null, "email9@gmail.com", "user9", "pass");
+        User account10 = new User(null, "email10@gmail.com", "user10", "pass");
+        User account11 = new User(null, "email11@gmail.com", "user11", "pass");
+        User account12 = new User(null, "email12@gmail.com", "user12", "pass");
+        User account13 = new User(null, "email13@gmail.com", "user13", "pass");
+        User account14 = new User(null, "email14@gmail.com", "user14", "pass");
+        User account15 = new User(null, "email15@gmail.com", "user15", "pass");
+        User account16 = new User(null, "email16@gmail.com", "user16", "pass");
+        User account17 = new User(null, "email17@gmail.com", "user17", "pass");
+        User account18 = new User(null, "email18@gmail.com", "user18", "pass");
+        User account19 = new User(null, "email19@gmail.com", "user19", "pass");
+        User account20 = new User(null, "email20@gmail.com", "user20", "pass");
+        User account21 = new User(null, "email21@gmail.com", "user21", "pass");
+        User account22 = new User(null, "email22@gmail.com", "user22", "pass");
+        User account23 = new User(null, "email23@gmail.com", "user23", "pass");
+        User account24 = new User(null, "email24@gmail.com", "user24", "pass");
 
         account1.addAuthorityName(AuthorityName.ADMINISTRATOR);
         account2.addAuthorityName(AuthorityName.ADMINISTRATOR);
@@ -90,7 +110,9 @@ public class DBService {
         // List<Answer> answers = new ArrayList<>(Arrays.asList(answer11, answer12, answer21, answer22, answer31, answer32));
         List<Choice> choices = new ArrayList<>(Arrays.asList(choice1, choice2, choice3));
         List<Activity> activities = new ArrayList<>(Arrays.asList(activity1, activity2));
-        List<Account> accounts = new ArrayList<>(Arrays.asList(account1, account2, account3, account4));
+        List<Account> accounts = new ArrayList<>(Arrays.asList(account1, account2, account3, account4, account5, account6, account7,
+                account8, account9, account10, account11, account12, account13, account14, account15, account16, account17,
+                account18, account19, account20, account21, account22, account23, account24));
 
 
         for (Account account : accounts) accountService.saveAccount(account);
