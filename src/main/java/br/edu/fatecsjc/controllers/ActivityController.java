@@ -40,7 +40,7 @@ public class ActivityController {
 
     @PreAuthorize("hasAnyRole('USER')")
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> insertActivity(@RequestBody Activity activity){
+    public ResponseEntity<Void> insertActivity(@RequestBody Activity activity) {
 
         Activity obj = activityService.saveActivity(activity);
 

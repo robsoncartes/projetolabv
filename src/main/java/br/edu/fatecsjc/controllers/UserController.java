@@ -2,10 +2,11 @@ package br.edu.fatecsjc.controllers;
 
 import br.edu.fatecsjc.models.User;
 import br.edu.fatecsjc.models.views.AccountView;
-import br.edu.fatecsjc.services.UserService;
+import br.edu.fatecsjc.services.impl.UserServiceImpl;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -18,7 +19,7 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @JsonView(AccountView.AccountLogin.class)
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -38,6 +39,7 @@ public class UserController {
         return ResponseEntity.ok().body(users);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> insertUser(@Valid @RequestBody User user) {
 

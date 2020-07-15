@@ -2,9 +2,6 @@ package br.edu.fatecsjc.security;
 
 import br.edu.fatecsjc.models.Account;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.Data;
-import org.apache.catalina.authenticator.SingleSignOnEntry;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,9 +13,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -51,7 +46,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
-            Authentication authResult) {
+                                            Authentication authResult) {
         // super.successfulAuthentication(request, response, chain, authResult);
 
         String email = ((JWTAccount) authResult.getPrincipal()).getUsername();
@@ -77,7 +72,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
          */
         @Override
         public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
-                AuthenticationException exception) throws IOException {
+                                            AuthenticationException exception) throws IOException {
 
             response.setStatus(401);
             response.setContentType("application/json");

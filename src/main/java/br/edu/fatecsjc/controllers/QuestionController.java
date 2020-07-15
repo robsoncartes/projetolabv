@@ -6,6 +6,7 @@ import br.edu.fatecsjc.services.QuestionService;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -39,6 +40,7 @@ public class QuestionController {
     }
 
     @JsonView(QuestionView.QuestionSave.class)
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> insertQuestion(@Valid @RequestBody Question question) {
 

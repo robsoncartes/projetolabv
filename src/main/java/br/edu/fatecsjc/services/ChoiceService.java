@@ -1,35 +1,16 @@
 package br.edu.fatecsjc.services;
 
 import br.edu.fatecsjc.models.Choice;
-import br.edu.fatecsjc.repositories.ChoiceRepository;
-import br.edu.fatecsjc.services.exceptions.ObjectNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
-@Service
-public class ChoiceService {
+public interface ChoiceService {
 
-    @Autowired
-    private ChoiceRepository choiceRepository;
+    Choice findById(Integer id);
 
-    public Choice findById(Integer id) {
+    @Transactional
+    void saveChoice(Choice choice);
 
-        Choice choice = choiceRepository.findById(id).orElse(null);
-
-        if (choice == null)
-            throw new ObjectNotFoundException("Escolha não encontrada. Id: " + id + ", Tipo: " + Choice.class.getName());
-
-        return choice;
-    }
-
-    public void saveChoice(Choice choice) {
-        choiceRepository.save(choice);
-    }
-
-    public List<Choice> findChoices() {
-
-        return choiceRepository.findAll();
-    }
+    List<Choice> findChoices();
 }

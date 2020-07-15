@@ -1,51 +1,18 @@
 package br.edu.fatecsjc.services;
 
 import br.edu.fatecsjc.models.Activity;
-import br.edu.fatecsjc.repositories.ActivityRepository;
-import br.edu.fatecsjc.services.exceptions.DataIntegrityException;
-import br.edu.fatecsjc.services.exceptions.ObjectNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
-@Service
-public class ActivityService {
+public interface ActivityService {
 
-    @Autowired
-    private ActivityRepository activityRepository;
+    Activity findById(Integer id);
 
-    public Activity findById(Integer id) {
+    boolean isActivityAvailable(String username, String examTitle);
 
-        Activity activity = activityRepository.findById(id).orElse(null);
+    @Transactional
+    Activity saveActivity(Activity activity);
 
-        if (activity == null)
-            throw new ObjectNotFoundException("Atividade não encontrada. Id: " + id + ", Tipo: " + Activity.class.getName());
-
-        return activity;
-    }
-
-    public boolean isActivityAvailable(String username, String examTitle) {
-
-        for (Activity activity : findActivities()) {
-            if ((activity.getUsername().equals(username)) && (activity.getExamTitle().equals(examTitle)))
-                return false;
-        }
-
-        return true;
-    }
-
-    public Activity saveActivity(Activity activity) {
-
-        boolean isValid = isActivityAvailable(activity.getUsername(), activity.getExamTitle());
-
-        if (isValid)
-            return activityRepository.save(activity);
-        throw new DataIntegrityException("O usuário já salvou uma atividade com este título.");
-    }
-
-    public List<Activity> findActivities() {
-
-        return activityRepository.findAll();
-    }
+    List<Activity> findActivities();
 }
