@@ -6,6 +6,7 @@ import br.edu.fatecsjc.services.ExamService;
 import br.edu.fatecsjc.services.exceptions.DataIntegrityException;
 import br.edu.fatecsjc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,6 +43,18 @@ public class ExamServiceImpl implements ExamService {
             return examRepository.save(exam);
         } else
             throw new DataIntegrityException("Já existe um exame com este título.");
+    }
+
+    @Override
+    public void deleteExamById(Integer id) {
+
+        findById(id);
+
+        try {
+            examRepository.deleteById(id);
+        }catch (DataIntegrityViolationException e){
+            throw new DataIntegrityException("Não é possível excluir o exam informado pois existem questões.");
+        }
     }
 
     @Override

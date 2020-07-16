@@ -61,6 +61,7 @@ public class AccountController {
         return ResponseEntity.noContent().build();
     }
 
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deleteAccount(@PathVariable Long id) {
 

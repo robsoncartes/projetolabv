@@ -12,5 +12,7 @@ public interface ExamService {
     @Transactional
     Exam saveExam(Exam exam);
 
+    void deleteExamById(Integer id);
+
     List<Exam> findExams();
 }

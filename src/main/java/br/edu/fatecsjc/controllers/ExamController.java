@@ -50,4 +50,14 @@ public class ExamController {
 
         return ResponseEntity.created(uri).build();
     }
+
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> deleteExam(@PathVariable Integer id){
+
+        examService.deleteExamById(id);
+
+        return ResponseEntity.noContent().build();
+    }
+
 }
