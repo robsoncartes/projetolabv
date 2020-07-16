@@ -1,7 +1,6 @@
 package br.edu.fatecsjc.services.impl;
 
 import br.edu.fatecsjc.models.Answer;
-import br.edu.fatecsjc.models.Question;
 import br.edu.fatecsjc.repositories.AnswerRepository;
 import br.edu.fatecsjc.repositories.QuestionRepository;
 import br.edu.fatecsjc.services.AnswerService;

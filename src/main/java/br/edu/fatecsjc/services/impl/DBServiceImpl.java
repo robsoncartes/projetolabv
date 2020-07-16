@@ -72,16 +72,16 @@ public class DBServiceImpl implements DBService {
         Answer answer14 = new Answer(null, "MAKE", false, question1);
 
         Question question2 = new Question(null, "The SQL WHERE clause:", exam1);
-        Answer answer15 = new Answer(null, "limits the column data that are returned.", false, question2);
-        Answer answer16 = new Answer(null, "limits the row data are returned.", true, question2);
-        Answer answer17 = new Answer(null, "Both A and B are correct.", false, question2);
-        Answer answer18 = new Answer(null, "Neither A nor B are correct.", false, question2);
+        Answer answer15 = new Answer(null, "limits the column data that are returned", false, question2);
+        Answer answer16 = new Answer(null, "limits the row data are returned", true, question2);
+        Answer answer17 = new Answer(null, "Both A and B are correct", false, question2);
+        Answer answer18 = new Answer(null, "Neither A nor B are correct", false, question2);
 
         Question question3 = new Question(null, "Which of the following is the original purpose of SQL?", exam1);
         Answer answer19 = new Answer(null, "To specify the syntax and semantics of SQL data definition language", false, question3);
         Answer answer20 = new Answer(null, "To specify the syntax and semantics of SQL manipulation language", false, question3);
         Answer answer21 = new Answer(null, "To define the data structures", false, question3);
-        Answer answer22 = new Answer(null, "All of the above.", true, question3);
+        Answer answer22 = new Answer(null, "All of the above", true, question3);
 
         Exam exam2 = new Exam(null, "General Knowledge", "General", "Some wikipedia questions for you to enjoy!", account1.getUsername());
 
@@ -211,9 +211,26 @@ public class DBServiceImpl implements DBService {
         question19.addAnswers(Arrays.asList(answer73, answer74, answer75));
         question20.addAnswers(Arrays.asList(answer76, answer77, answer78));
 
-        question1.setAssertion("True");
-        question2.setAssertion("Apple");
-        question3.setAssertion("INSERT");
+        question1.setAssertion("INSERT");
+        question2.setAssertion("limits the row data are returned");
+        question3.setAssertion("All of the above");
+        question4.setAssertion("3");
+        question5.setAssertion("Bangalore");
+        question6.setAssertion("True");
+        question7.setAssertion("Apple");
+        question8.setAssertion("True");
+        question9.setAssertion("True");
+        question10.setAssertion("All");
+        question11.setAssertion("manifest");
+        question12.setAssertion("Tru");
+        question13.setAssertion("True");
+        question14.setAssertion("Activity");
+        question15.setAssertion("View");
+        question16.setAssertion("/res/values");
+        question17.setAssertion("Google Inc");
+        question18.setAssertion("Activity");
+        question19.setAssertion("Version Number");
+        question20.setAssertion("android:minSdkVersion");
 
         exam1.addQuestions(Arrays.asList(question1, question2, question3));
         exam2.addQuestions(Arrays.asList(question4, question5));
