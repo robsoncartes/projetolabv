@@ -1,7 +1,6 @@
 package br.edu.fatecsjc.services;
 
 import br.edu.fatecsjc.models.Answer;
-import br.edu.fatecsjc.models.Question;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -13,7 +12,7 @@ public interface AnswerService {
     boolean isAnswerValid(String answerTitle, String questionTitle);
 
     @Transactional
-    Answer saveAnswer(Answer answer, Question question);
+    Answer saveAnswer(Answer answer);
 
     List<Answer> findAnswers();
 }

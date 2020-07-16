@@ -44,12 +44,12 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     @Override
-    public Answer saveAnswer(Answer answer, Question question) {
+    public Answer saveAnswer(Answer answer) {
 
-        boolean isValid = isAnswerValid(answer.getAnswer(), question.getQuestionTitle());
+        boolean isValid = isAnswerValid(answer.getAnswer(), answer.getQuestion().getQuestionTitle());
 
         if (isValid) {
-            questionRepository.save(question);
+            questionRepository.save(answer.getQuestion());
             return answerRepository.save(answer);
         }
 
