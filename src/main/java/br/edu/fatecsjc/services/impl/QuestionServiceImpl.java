@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class QuestionServiceImpl implements QuestionService {
@@ -97,5 +98,17 @@ public class QuestionServiceImpl implements QuestionService {
     public List<Question> findQuestions() {
 
         return questionRepository.findAll();
+    }
+
+    @Override
+    public List<Question> findQuestionByExamId(Integer examId) {
+
+        Exam exam = examRepository.findById(examId).orElse(null);
+
+        if (exam == null)
+            throw new ObjectNotFoundException("Não existe questões para o Exam informado porque o Exame não existe. Id: "
+                    + examId + ", Tipo: " + Exam.class.getName());
+
+        return questionRepository.findQuestionsByExam(examId);
     }
 }

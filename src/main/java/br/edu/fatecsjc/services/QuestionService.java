@@ -4,6 +4,7 @@ import br.edu.fatecsjc.models.Question;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 public interface QuestionService {
 
@@ -17,5 +18,7 @@ public interface QuestionService {
     Question saveQuestion(Question question);
 
     List<Question> findQuestions();
+
+  List<Question> findQuestionByExamId(Integer examId);
 
 }

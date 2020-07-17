@@ -1,8 +1,10 @@
 package br.edu.fatecsjc.controllers;
 
 import br.edu.fatecsjc.models.Exam;
+import br.edu.fatecsjc.models.Question;
 import br.edu.fatecsjc.models.views.ExamView;
 import br.edu.fatecsjc.services.ExamService;
+import br.edu.fatecsjc.services.QuestionService;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,9 @@ public class ExamController {
 
     @Autowired
     private ExamService examService;
+
+    @Autowired
+    private QuestionService questionService;
 
     @JsonView(ExamView.ExamComplete.class)
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -53,11 +58,20 @@ public class ExamController {
 
     @PreAuthorize("hasRole('ADMINISTRATOR')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> deleteExam(@PathVariable Integer id){
+    public ResponseEntity<Void> deleteExam(@PathVariable Integer id) {
 
         examService.deleteExamById(id);
 
         return ResponseEntity.noContent().build();
     }
 
+    @JsonView(ExamView.ExamSave.class)
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
+    @RequestMapping(value = "/{examId}/questions", method = RequestMethod.GET)
+    public ResponseEntity<List<Question>> findQuestionsByExam(@PathVariable Integer examId) {
+
+        List<Question> questions = questionService.findQuestionByExamId(examId);
+
+        return ResponseEntity.ok().body(questions);
+    }
 }
