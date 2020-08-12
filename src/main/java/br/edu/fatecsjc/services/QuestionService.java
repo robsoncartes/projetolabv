@@ -18,4 +18,5 @@ public interface QuestionService {
 
     List<Question> findQuestions();
 
+    List<Question> findQuestionByExamId(Integer examId);
 }

@@ -98,4 +98,16 @@ public class QuestionServiceImpl implements QuestionService {
 
         return questionRepository.findAll();
     }
+
+    @Override
+    public List<Question> findQuestionByExamId(Integer examId) {
+
+        Exam exam = examRepository.findById(examId).orElse(null);
+
+        if (exam == null)
+            throw new ObjectNotFoundException("Não existe questões para o Exam informado porque o Exame não existe. Id: "
+                    + examId + ", Tipo: " + Exam.class.getName());
+
+        return questionRepository.findQuestionsByExam(examId);
+    }
 }

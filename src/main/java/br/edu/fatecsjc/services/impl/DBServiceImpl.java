@@ -222,7 +222,7 @@ public class DBServiceImpl implements DBService {
         question9.setAssertion("True");
         question10.setAssertion("All");
         question11.setAssertion("manifest");
-        question12.setAssertion("Tru");
+        question12.setAssertion("True");
         question13.setAssertion("True");
         question14.setAssertion("Activity");
         question15.setAssertion("View");
@@ -242,8 +242,9 @@ public class DBServiceImpl implements DBService {
 
         List<Exam> exams = new ArrayList<>(Arrays.asList(exam1, exam2, exam3));
 
-        List<Question> questions = new ArrayList<>(Arrays.asList(question6, question7, question8, question9, question10,
-                question11, question12, question13, question14, question15, question16, question17, question18, question19, question20));
+        List<Question> questions = new ArrayList<>(Arrays.asList(question1, question2, question3, question4, question5,
+                question6, question7, question8, question9, question10, question11, question12, question13, question14,
+                question15, question16, question17, question18, question19, question20));
 
         List<Answer> answers = new ArrayList<>(Arrays.asList(answer11, answer12, answer13, answer14, answer15, answer16, answer17,
                 answer18, answer19, answer20, answer21, answer22, answer23, answer24, answer25, answer26, answer27, answer28, answer29,
