@@ -3,6 +3,7 @@ package br.edu.fatecsjc.repositories;
 import br.edu.fatecsjc.models.Account;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,6 +18,8 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 
     Account findByUsername(String username);
 
+    // Geralmente, o mecanismo de criação de consulta para JPA funciona conforme descrito em “Métodos de consulta"
+    @Query("SELECT obj FROM Account  obj WHERE obj.email = ?1 OR obj.username = ?2")
     Account findByEmailOrUsername(String email, String username);
 
     @Override
