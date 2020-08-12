@@ -12,6 +12,10 @@ public interface AccountService {
 
     Account findByEmail(String email);
 
+    Account findByUsername(String username);
+
+    Account findByEmailOrUsername(String email, String username);
+
     @Transactional
     Account saveAccount(Account account);
 

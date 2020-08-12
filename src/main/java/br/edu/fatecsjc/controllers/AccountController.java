@@ -42,6 +42,25 @@ public class AccountController {
     }
 
     @JsonView(AccountView.AccountComplete.class)
+    @RequestMapping(value = "/username", method = RequestMethod.GET)
+    public ResponseEntity<Account> findAccountByUsername(@RequestParam(value = "value") String username) {
+
+        Account account = accountService.findByUsername(username);
+
+        return ResponseEntity.ok().body(account);
+    }
+
+    @JsonView(AccountView.AccountComplete.class)
+    @RequestMapping(value = "/emailOrUsername", method = RequestMethod.GET)
+    public ResponseEntity<Account> findAccountByEmailOrUsername(
+            @RequestParam(value = "value") String email, @RequestParam(value = "value") String username) {
+
+        Account account = accountService.findByEmailOrUsername(email, username);
+
+        return ResponseEntity.ok().body(account);
+    }
+
+    @JsonView(AccountView.AccountComplete.class)
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> insertAccount(@Valid @RequestBody Account account) {
 

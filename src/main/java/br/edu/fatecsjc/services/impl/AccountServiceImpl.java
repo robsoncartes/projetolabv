@@ -42,7 +42,7 @@ public class AccountServiceImpl implements AccountService {
         JWTAccount jwtAccount = jwtAccountService.getAccountAuthenticated();
 
         if (jwtAccount == null || !jwtAccount.hasHole(AuthorityName.ADMINISTRATOR) && !id.equals(jwtAccount.getId()))
-            throw new AuthorizationException("Accesso negado.");
+            throw new AuthorizationException("Acesso negado.");
 
         Account account = accountRepository.findById(id).orElse(null);
 
@@ -58,7 +58,7 @@ public class AccountServiceImpl implements AccountService {
         JWTAccount jwtAccount = jwtAccountService.getAccountAuthenticated();
 
         if (jwtAccount == null || !jwtAccount.hasHole(AuthorityName.ADMINISTRATOR) && !email.equals(jwtAccount.getUsername()))
-            throw new AuthorizationException("Accesso negado.");
+            throw new AuthorizationException("Acesso negado.");
 
         Account account = accountRepository.findByEmail(email);
 
@@ -69,16 +69,48 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public Account findByUsername(String username) {
+
+        JWTAccount jwtAccount = jwtAccountService.getAccountAuthenticated();
+
+        if (jwtAccount == null || !jwtAccount.hasHole(AuthorityName.ADMINISTRATOR) && !username.equals(jwtAccount.getUsername()))
+            throw new AuthorizationException("Acesso negado.");
+
+        Account account = accountRepository.findByUsername(username);
+
+        if (account == null)
+            throw new ObjectNotFoundException("Conta não encontrada. Username: " + username + ", Tipo: " + Account.class.getName());
+
+        return account;
+    }
+
+    @Override
+    public Account findByEmailOrUsername(String email, String username) {
+
+        JWTAccount jwtAccount = jwtAccountService.getAccountAuthenticated();
+
+        if (jwtAccount == null || !jwtAccount.hasHole(AuthorityName.ADMINISTRATOR) && !email.equals(jwtAccount.getUsername()))
+            throw new AuthorizationException("Acesso negado.");
+
+        Account account = accountRepository.findByEmailOrUsername(email, username);
+
+        if (account == null)
+            throw new ObjectNotFoundException("Conta não encontrada. Email: " + email + " ou " + "Username: " + username + ", Tipo: " + Account.class.getName());
+
+        return account;
+    }
+
+    @Override
     public Account saveAccount(Account account) {
 
-        Account obj = accountRepository.findByEmail(account.getEmail());
-
+        Account obj = accountRepository.findByEmailOrUsername(account.getEmail(), account.getUsername());
         if (obj == null) {
             account.setId(null);
             account.setPassword(passwordEncoder.encode(account.getPassword()));
             return accountRepository.save(account);
-        } else
-            throw new DataIntegrityException("Email já existe.");
+        } else {
+            throw new DataIntegrityException("Email ou username já existente.");
+        }
     }
 
     @Override
