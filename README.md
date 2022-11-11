@@ -9,7 +9,7 @@
 
 ## Membros do Grupo
 
-|    **Nome**    	|           **Email**          	|             **Github**            	|
-|:--------------:	|:----------------------------:	|:---------------------------------:	|
-|  Robson Sousa  	|   robsoncartes@outlook.com   	|  https://github.com/robsoncartes  	|
-| Rodolfo Santos 	| rodolfodossantos29@gmail.com 	| https://github.com/rodolfo-santos 	|
+|    **Nome**    |            **Github**             |
+|:--------------:|:---------------------------------:|
+|  Robson Sousa  |  https://github.com/robsoncartes  |
+| Rodolfo Santos | https://github.com/rodolfo-santos |
