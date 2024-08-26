@@ -49,7 +49,7 @@
         <org.hibernate.version>5.2.15.Final</org.hibernate.version>
         <mysql.version>8.0.28</mysql.version>
         <java.version>1.8</java.version>
-        <swagger.version>2.7.0</swagger.version>
+        <swagger.version>2.10.0</swagger.version>
     </properties>
 
     <dependencies>
